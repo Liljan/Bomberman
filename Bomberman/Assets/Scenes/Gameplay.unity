@@ -5856,6 +5856,7 @@ GameObject:
   - component: {fileID: 1936908252}
   - component: {fileID: 1936908251}
   - component: {fileID: 1936908253}
+  - component: {fileID: 1936908254}
   m_Layer: 0
   m_Name: BombSpawner
   m_TagString: Untagged
@@ -5877,6 +5878,9 @@ MonoBehaviour:
   camera: {fileID: 1317160994}
   tileMap: {fileID: 478355195}
   bombPool: {fileID: 1936908253}
+  explosionPool: {fileID: 1936908254}
+  destructableTile: {fileID: 11400000, guid: 64f0e96dd2705ef4fad1cf7bcbb781c9, type: 2}
+  wallTile: {fileID: 11400000, guid: b2b4273f7e0420b4fafe511c16cc33e1, type: 2}
 --- !u!4 &1936908252
 Transform:
   m_ObjectHideFlags: 0
@@ -5904,4 +5908,19 @@ MonoBehaviour:
   originalInstance: {fileID: 1792681462790594, guid: 8bc5ef3d0f683b94bb841cd14b69924b,
     type: 2}
   size: 6
+  isExpandable: 1
+--- !u!114 &1936908254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1936908250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee30639a9e92a9243ba130ecabcf4039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalInstance: {fileID: 1630139361789628, guid: 15d3134b23365644298a00267caaf708,
+    type: 2}
+  size: 10
   isExpandable: 1
