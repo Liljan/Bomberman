@@ -18,20 +18,21 @@ public class BombSpawner : MonoBehaviour
     void Start()
     {
         LevelEvents.Instance().ExplodeBomb += SpawnExplosion;
+        LevelEvents.Instance().SpawnBomb += SpawnBomb;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 worldPos = cam.ScreenToWorldPoint(Input.mousePosition);
+ 
+    }
 
-            Vector3Int cell = tileMap.WorldToCell(worldPos);
-            Vector3 cellCenterPosition = tileMap.GetCellCenterWorld(cell);
+    void SpawnBomb(Vector3 pos)
+    {
+        Vector3Int cell = tileMap.WorldToCell(pos);
+        Vector3 cellCenterPosition = tileMap.GetCellCenterWorld(cell);
 
-            bombPool.SpawnObject(cellCenterPosition, Quaternion.identity);
-        }
+        bombPool.SpawnObject(cellCenterPosition, Quaternion.identity);
     }
 
     void SpawnExplosion(Vector3 pos)
