@@ -5,19 +5,14 @@ using UnityEngine.Tilemaps;
 
 public class BombSpawner : MonoBehaviour
 {
-    public Camera camera;
+    public Camera cam;
     public Tilemap tileMap;
 
     public ObjectPool bombPool;
     public ObjectPool explosionPool;
 
-    public RuleTile destructableTile;
+    public TileBase destructableTile;
     public TileBase wallTile;
-
-    private void Awake()
-    {
-
-    }
 
     // Use this for initialization
     void Start()
@@ -30,7 +25,7 @@ public class BombSpawner : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 worldPos = camera.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 worldPos = cam.ScreenToWorldPoint(Input.mousePosition);
 
             Vector3Int cell = tileMap.WorldToCell(worldPos);
             Vector3 cellCenterPosition = tileMap.GetCellCenterWorld(cell);
@@ -51,7 +46,8 @@ public class BombSpawner : MonoBehaviour
 
     void ExplodeCell(Vector3Int pos, Vector3Int dir)
     {
-        Tile tile = tileMap.GetTile<Tile>(pos);
+        TileBase tile = tileMap.GetTile<TileBase>(pos);
+        Vector3 cellCenterPosition = tileMap.GetCellCenterWorld(pos);
 
         if (tile == wallTile)
         {
@@ -59,14 +55,15 @@ public class BombSpawner : MonoBehaviour
         }
             
         if (tile == destructableTile)
-        {
-            tileMap.SetTile(pos, null);
-            Vector3 cellCenterPosition = tileMap.GetCellCenterWorld(pos);
+        {  
             explosionPool.SpawnObject(cellCenterPosition, Quaternion.identity);
+            tileMap.SetTile(pos, null);
             return;
         }
 
         // else
+        explosionPool.SpawnObject(cellCenterPosition, Quaternion.identity);
+
         ExplodeCell(pos + dir, dir);
     }
 }
