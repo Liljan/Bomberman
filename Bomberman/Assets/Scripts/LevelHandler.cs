@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class BombSpawner : MonoBehaviour
+public class LevelHandler : MonoBehaviour
 {
+    public int amountOfPlayers = 2;
+
     public Camera cam;
     public Tilemap tileMap;
+
+    public GameObject playerObject;
+    public Transform[] spawnPoints;
+    private List<Character> _players;
 
     public ObjectPool bombPool;
     public ObjectPool explosionPool;
@@ -19,13 +25,16 @@ public class BombSpawner : MonoBehaviour
     {
         LevelEvents.Instance().ExplodeBomb += SpawnExplosion;
         LevelEvents.Instance().SpawnBomb += SpawnBomb;
+
+        for (int i = 0; i < amountOfPlayers; i++)
+        {
+            GameObject spawnedPlayer = Instantiate(playerObject, spawnPoints[i].position, Quaternion.identity);
+            Character character = spawnedPlayer.GetComponent<Character>();
+            character.SetID(i + 1);
+           // _players.Add(character);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
- 
-    }
 
     void SpawnBomb(Vector3 pos)
     {
@@ -45,6 +54,7 @@ public class BombSpawner : MonoBehaviour
         ExplodeCell(cellPos, Vector3Int.right);
     }
 
+
     void ExplodeCell(Vector3Int pos, Vector3Int dir)
     {
         TileBase tile = tileMap.GetTile<TileBase>(pos);
@@ -54,9 +64,9 @@ public class BombSpawner : MonoBehaviour
         {
             return;
         }
-            
+
         if (tile == destructableTile)
-        {  
+        {
             explosionPool.SpawnObject(cellCenterPosition, Quaternion.identity);
             tileMap.SetTile(pos, null);
             return;

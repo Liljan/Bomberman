@@ -4,15 +4,21 @@ public class Character : MonoBehaviour
 {
     private const string HorizontalAxis = "Horizontal";
     private const string VerticalAxis = "Vertical";
+
+    public int ID;
     public float speed = 1.0f;
 
-    public int bombAmount = 3;
+    public int bombsMax = 3;
     private int _bombs;
     public float bombRechargeTime = 3.0f;
     private float _bombRechargeTimer;
 
+    public int healthMax = 3;
+    private int _health;
+
     private Rigidbody2D _rb2d;
     private Animator _animator;
+
 
     private void Awake()
     {
@@ -20,11 +26,21 @@ public class Character : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
+
     private void OnEnable()
     {
-        _bombs = bombAmount;
+        _bombs = bombsMax;
+        _health = healthMax;
         _bombRechargeTimer = bombRechargeTime;
     }
+
+
+    private void Start()
+    {
+        UIEvents.Instance().InvokeUpdateHealth(ID, _health);
+        UIEvents.Instance().InvokeUpdateBomb(ID, _bombs);
+    }
+
 
     private void MoveWithSticks()
     {
@@ -42,7 +58,7 @@ public class Character : MonoBehaviour
 
     private void RechargeBombs()
     {
-        if (_bombs < bombAmount)
+        if (_bombs < bombsMax)
         {
             _bombRechargeTimer -= Time.deltaTime;
 
@@ -50,9 +66,11 @@ public class Character : MonoBehaviour
             {
                 _bombRechargeTimer = bombRechargeTime;
                 _bombs++;
+                UIEvents.Instance().InvokeUpdateBomb(ID, _bombs);
             }
         }
     }
+
 
     // Update is called once per frame
     void Update()
@@ -62,10 +80,42 @@ public class Character : MonoBehaviour
 
         if (Input.GetButtonDown("Bomb") && _bombs > 0)
         {
-            LevelEvents.Instance().InvokeSpawnBomb(transform.position);
-            _bombs--;
+            DropBomb();
         }
 
         RechargeBombs();
     }
+
+
+    public void SetID(int ID)
+    {
+        this.ID = ID;
+    }
+
+
+    private void TakeDamage(int damage)
+    {
+        _health -= damage;
+        _health = Mathf.Max(0, _health);
+        UIEvents.Instance().InvokeUpdateHealth(ID, _health);
+    }
+
+
+    private void DropBomb()
+    {
+        LevelEvents.Instance().InvokeSpawnBomb(transform.position);
+        _bombs--;
+        UIEvents.Instance().InvokeUpdateBomb(ID, _bombs);
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Explosion")
+        {
+            TakeDamage(1);
+        }
+    }
+
+
 }
