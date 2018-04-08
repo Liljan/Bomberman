@@ -1,47 +1,55 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    private const string HorizontalAxis = "Horizontal";
+    private const string VerticalAxis = "Vertical";
     public float speed = 1.0f;
 
     public int bombAmount = 3;
-    private int bombs;
+    private int _bombs;
     public float bombRechargeTime = 3.0f;
-    private float bombRechargeTimer;
+    private float _bombRechargeTimer;
 
-    private Rigidbody2D rb2d;
+    private Rigidbody2D _rb2d;
+    private Animator _animator;
 
     private void Awake()
     {
-        rb2d = GetComponent<Rigidbody2D>();
+        _rb2d = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
     {
-        bombs = bombAmount;
-        bombRechargeTimer = bombRechargeTime;
+        _bombs = bombAmount;
+        _bombRechargeTimer = bombRechargeTime;
     }
 
-    private void Move()
+    private void MoveWithSticks()
     {
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
+        float x = Input.GetAxis(HorizontalAxis);
+        float y = Input.GetAxis(VerticalAxis);
 
-        rb2d.velocity = new Vector3(x * speed, y * speed, 0.0f);
+        _rb2d.velocity = new Vector3(x * speed, y * speed, 0.0f);
+
+        _animator.SetBool("Left", x > 0.05f);
+        _animator.SetBool("Right", x < -0.05f);
+        _animator.SetBool("Up", y > 0.05f);
+        _animator.SetBool("Down", y < -0.05f);
     }
+
 
     private void RechargeBombs()
     {
-        if (bombs < bombAmount)
+        if (_bombs < bombAmount)
         {
-            bombRechargeTimer -= Time.deltaTime;
+            _bombRechargeTimer -= Time.deltaTime;
 
-            if (bombRechargeTimer <= 0.0f)
+            if (_bombRechargeTimer <= 0.0f)
             {
-                bombRechargeTimer = bombRechargeTime;
-                bombs++;
+                _bombRechargeTimer = bombRechargeTime;
+                _bombs++;
             }
         }
     }
@@ -49,12 +57,13 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
+        //MoveStickSensitivity();
+        MoveWithSticks();
 
-        if(Input.GetButtonDown("Bomb") && bombs > 0)
+        if (Input.GetButtonDown("Bomb") && _bombs > 0)
         {
             LevelEvents.Instance().InvokeSpawnBomb(transform.position);
-            bombs--;
+            _bombs--;
         }
 
         RechargeBombs();

@@ -1833,6 +1833,23 @@ MonoBehaviour:
   speed: 4
   bombAmount: 3
   bombRechargeTime: 3
+--- !u!95 &912719357
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 912719355}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d56a7af2b572f0540855ebd8d43a812c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &978656100
 Prefab:
   m_ObjectHideFlags: 0
@@ -1912,6 +1929,12 @@ Prefab:
       propertyPath: m_SortingLayer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 212525924670971464, guid: 46a18fbc812f2274995f5a2038828e8a,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300028, guid: 122da56307dffb94da1a974a431dd409,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 46a18fbc812f2274995f5a2038828e8a, type: 2}
   m_IsPrefabParent: 0
