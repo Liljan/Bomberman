@@ -2,8 +2,9 @@
 
 public class Character : MonoBehaviour
 {
-    private const string HorizontalAxis = "Horizontal";
-    private const string VerticalAxis = "Vertical";
+    private string HorizontalAxis;
+    private string VerticalAxis;
+    private string ActionButton;
 
     public int ID;
     public float speed = 1.0f;
@@ -78,7 +79,7 @@ public class Character : MonoBehaviour
         //MoveStickSensitivity();
         MoveWithSticks();
 
-        if (Input.GetButtonDown("Bomb") && _bombs > 0)
+        if (Input.GetButtonDown(ActionButton) && _bombs > 0)
         {
             DropBomb();
         }
@@ -90,6 +91,10 @@ public class Character : MonoBehaviour
     public void SetID(int ID)
     {
         this.ID = ID;
+
+        HorizontalAxis = InputMapping.LEFT_HORIZONTAL[ID - 1];
+        VerticalAxis = InputMapping.LEFT_VERTICAL[ID - 1];
+        ActionButton = InputMapping.ACTION[ID - 1];
     }
 
 
