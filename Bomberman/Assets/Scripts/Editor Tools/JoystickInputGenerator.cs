@@ -47,6 +47,53 @@ class InputAction
     }
 }
 
+class InputMappingCSGenerator
+{
+    public int amount;
+
+    private string fields;
+
+    public InputMappingCSGenerator(int amount)
+    {
+        this.amount = amount;
+        fields = "";
+    }
+
+    public void AddField(string name)
+    {
+        fields += "public static string[] ";
+        fields += name;
+        fields += "= { ";
+
+        for (int i = 1; i <= amount-1; i++)
+        {
+            fields += "\"" + name + "_" + i + "\", ";
+        }
+
+        fields += "\"" + name + "_" + amount + "\" };";
+        fields += "\n";
+    }
+
+    public void AddLineBreak()
+    {
+        fields += "\n";
+    }
+
+    public string GetString(string fileName)
+    {
+        string result = "";
+
+        result += "public static class " + fileName + "\n";
+        result += "{\n";
+
+        result += fields;
+
+        result += "}\n\n";
+
+        return result;
+    }
+}
+
 public class JoystickInputGenerator : EditorWindow
 {
     private string _fileName = "InputManager.asset";
@@ -70,11 +117,12 @@ public class JoystickInputGenerator : EditorWindow
 
         if (GUILayout.Button("Generate Input file"))
         {
-            if (File.Exists(_fileName))
+           /* if (File.Exists(_fileName))
             {
                 Debug.Log("Error: File already exists.");
                 return;
             }
+            */
 
             StreamWriter sr = File.CreateText(_fileName);
             sr.WriteLine("%YAML 1.1");
@@ -92,6 +140,15 @@ public class JoystickInputGenerator : EditorWindow
             }
 
             sr.Close();
+
+            StreamWriter cssr = File.CreateText("InputMappz.cs");
+            InputMappingCSGenerator csgen = new InputMappingCSGenerator(_numerOfContollers);
+
+            csgen.AddField("Jump");
+            csgen.AddLineBreak();
+
+            cssr.Write( csgen.GetString("InputMappz") );
+            cssr.Close();
         }
     }
 }
