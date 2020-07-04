@@ -53,7 +53,7 @@ public class ExplosionHandler : MonoBehaviour
 
         if (tile == destructableTile)
         {
-            explosionPool.SpawnObject(cellCenterPosition, Quaternion.identity);
+            //explosionPool.SpawnObject(cellCenterPosition, Quaternion.identity);
             tileMap.SetTile(pos, null);
             return;
         }
