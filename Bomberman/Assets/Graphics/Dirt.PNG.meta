@@ -1,61 +1,159 @@
 fileFormatVersion: 2
 guid: 22bf9b8b83feb1f41ae2b2d6139779f3
-timeCreated: 1522487638
-licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Dirt_0
-    21300002: Dirt_1
-    21300004: Dirt_2
-    21300006: Dirt_3
-    21300008: Dirt_4
-    21300010: Dirt_5
-    21300012: Dirt_6
-    21300014: Dirt_7
-    21300016: Dirt_8
-    21300018: Dirt_9
-    21300020: Dirt_10
-    21300022: Dirt_11
-    21300024: Dirt_12
-    21300026: Dirt_13
-    21300028: Dirt_14
-    21300030: Dirt_15
-    21300032: Dirt_16
-    21300034: Dirt_17
-    21300036: Dirt_18
-    21300038: Dirt_19
-    21300040: Dirt_20
-    21300042: Dirt_21
-    21300044: Dirt_22
-    21300046: Dirt_23
-    21300048: Dirt_24
-    21300050: Dirt_25
-    21300052: Dirt_26
-    21300054: Dirt_27
-    21300056: Dirt_28
-    21300058: Dirt_29
-    21300060: Dirt_30
-    21300062: Dirt_31
-    21300064: Dirt_32
-    21300066: Dirt_33
-    21300068: Dirt_34
-    21300070: Dirt_35
-    21300072: Dirt_36
-    21300074: Dirt_37
-    21300076: Dirt_38
-    21300078: Dirt_39
-    21300080: Dirt_40
-    21300082: Dirt_41
-    21300084: Dirt_42
-    21300086: Dirt_43
-    21300088: Dirt_44
-    21300090: Dirt_45
-    21300092: Dirt_46
-    21300094: Dirt_47
-    21300096: Dirt_48
-    21300098: Dirt_49
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Dirt_0
+  - first:
+      213: 21300002
+    second: Dirt_1
+  - first:
+      213: 21300004
+    second: Dirt_2
+  - first:
+      213: 21300006
+    second: Dirt_3
+  - first:
+      213: 21300008
+    second: Dirt_4
+  - first:
+      213: 21300010
+    second: Dirt_5
+  - first:
+      213: 21300012
+    second: Dirt_6
+  - first:
+      213: 21300014
+    second: Dirt_7
+  - first:
+      213: 21300016
+    second: Dirt_8
+  - first:
+      213: 21300018
+    second: Dirt_9
+  - first:
+      213: 21300020
+    second: Dirt_10
+  - first:
+      213: 21300022
+    second: Dirt_11
+  - first:
+      213: 21300024
+    second: Dirt_12
+  - first:
+      213: 21300026
+    second: Dirt_13
+  - first:
+      213: 21300028
+    second: Dirt_14
+  - first:
+      213: 21300030
+    second: Dirt_15
+  - first:
+      213: 21300032
+    second: Dirt_16
+  - first:
+      213: 21300034
+    second: Dirt_17
+  - first:
+      213: 21300036
+    second: Dirt_18
+  - first:
+      213: 21300038
+    second: Dirt_19
+  - first:
+      213: 21300040
+    second: Dirt_20
+  - first:
+      213: 21300042
+    second: Dirt_21
+  - first:
+      213: 21300044
+    second: Dirt_22
+  - first:
+      213: 21300046
+    second: Dirt_23
+  - first:
+      213: 21300048
+    second: Dirt_24
+  - first:
+      213: 21300050
+    second: Dirt_25
+  - first:
+      213: 21300052
+    second: Dirt_26
+  - first:
+      213: 21300054
+    second: Dirt_27
+  - first:
+      213: 21300056
+    second: Dirt_28
+  - first:
+      213: 21300058
+    second: Dirt_29
+  - first:
+      213: 21300060
+    second: Dirt_30
+  - first:
+      213: 21300062
+    second: Dirt_31
+  - first:
+      213: 21300064
+    second: Dirt_32
+  - first:
+      213: 21300066
+    second: Dirt_33
+  - first:
+      213: 21300068
+    second: Dirt_34
+  - first:
+      213: 21300070
+    second: Dirt_35
+  - first:
+      213: 21300072
+    second: Dirt_36
+  - first:
+      213: 21300074
+    second: Dirt_37
+  - first:
+      213: 21300076
+    second: Dirt_38
+  - first:
+      213: 21300078
+    second: Dirt_39
+  - first:
+      213: 21300080
+    second: Dirt_40
+  - first:
+      213: 21300082
+    second: Dirt_41
+  - first:
+      213: 21300084
+    second: Dirt_42
+  - first:
+      213: 21300086
+    second: Dirt_43
+  - first:
+      213: 21300088
+    second: Dirt_44
+  - first:
+      213: 21300090
+    second: Dirt_45
+  - first:
+      213: 21300092
+    second: Dirt_46
+  - first:
+      213: 21300094
+    second: Dirt_47
+  - first:
+      213: 21300096
+    second: Dirt_48
+  - first:
+      213: 21300098
+    second: Dirt_49
   externalObjects: {}
-  serializedVersion: 4
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -73,6 +171,8 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -83,7 +183,7 @@ TextureImporter:
     serializedVersion: 2
     filterMode: 0
     aniso: -1
-    mipBias: -1
+    mipBias: -100
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -103,11 +203,14 @@ TextureImporter:
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
+  singleChannelComponent: 0
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  applyGammaDecoding: 1
   platformSettings:
-  - buildTarget: DefaultTexturePlatform
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -117,7 +220,9 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - buildTarget: Standalone
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -127,7 +232,9 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - buildTarget: Android
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -137,7 +244,9 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - buildTarget: WebGL
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -147,6 +256,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -164,6 +274,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 02305410000000000800000000000000
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_1
       rect:
@@ -178,6 +295,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 22305410000000000800000000000000
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_2
       rect:
@@ -192,6 +316,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 42305410000000000800000000000000
+      internalID: 21300004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_3
       rect:
@@ -206,6 +337,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 62305410000000000800000000000000
+      internalID: 21300006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_4
       rect:
@@ -220,6 +358,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 82305410000000000800000000000000
+      internalID: 21300008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_5
       rect:
@@ -234,6 +379,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: a2305410000000000800000000000000
+      internalID: 21300010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_6
       rect:
@@ -248,6 +400,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: c2305410000000000800000000000000
+      internalID: 21300012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_7
       rect:
@@ -262,6 +421,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: e2305410000000000800000000000000
+      internalID: 21300014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_8
       rect:
@@ -276,6 +442,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 03305410000000000800000000000000
+      internalID: 21300016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_9
       rect:
@@ -290,6 +463,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 23305410000000000800000000000000
+      internalID: 21300018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_10
       rect:
@@ -304,6 +484,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 43305410000000000800000000000000
+      internalID: 21300020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_11
       rect:
@@ -318,6 +505,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 63305410000000000800000000000000
+      internalID: 21300022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_12
       rect:
@@ -332,6 +526,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 83305410000000000800000000000000
+      internalID: 21300024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_13
       rect:
@@ -346,6 +547,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: a3305410000000000800000000000000
+      internalID: 21300026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_14
       rect:
@@ -360,6 +568,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: c3305410000000000800000000000000
+      internalID: 21300028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_15
       rect:
@@ -374,6 +589,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: e3305410000000000800000000000000
+      internalID: 21300030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_16
       rect:
@@ -388,6 +610,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 04305410000000000800000000000000
+      internalID: 21300032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_17
       rect:
@@ -402,6 +631,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 24305410000000000800000000000000
+      internalID: 21300034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_18
       rect:
@@ -416,6 +652,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 44305410000000000800000000000000
+      internalID: 21300036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_19
       rect:
@@ -430,6 +673,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 64305410000000000800000000000000
+      internalID: 21300038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_20
       rect:
@@ -444,6 +694,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 84305410000000000800000000000000
+      internalID: 21300040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_21
       rect:
@@ -458,6 +715,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: a4305410000000000800000000000000
+      internalID: 21300042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_22
       rect:
@@ -472,6 +736,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: c4305410000000000800000000000000
+      internalID: 21300044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_23
       rect:
@@ -486,6 +757,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: e4305410000000000800000000000000
+      internalID: 21300046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_24
       rect:
@@ -500,6 +778,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 05305410000000000800000000000000
+      internalID: 21300048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_25
       rect:
@@ -514,6 +799,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 25305410000000000800000000000000
+      internalID: 21300050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_26
       rect:
@@ -528,6 +820,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 45305410000000000800000000000000
+      internalID: 21300052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_27
       rect:
@@ -542,6 +841,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 65305410000000000800000000000000
+      internalID: 21300054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_28
       rect:
@@ -556,6 +862,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 85305410000000000800000000000000
+      internalID: 21300056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_29
       rect:
@@ -570,6 +883,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: a5305410000000000800000000000000
+      internalID: 21300058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_30
       rect:
@@ -584,6 +904,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: c5305410000000000800000000000000
+      internalID: 21300060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_31
       rect:
@@ -598,6 +925,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: e5305410000000000800000000000000
+      internalID: 21300062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_32
       rect:
@@ -612,6 +946,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 06305410000000000800000000000000
+      internalID: 21300064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_33
       rect:
@@ -626,6 +967,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 26305410000000000800000000000000
+      internalID: 21300066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_34
       rect:
@@ -640,6 +988,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 46305410000000000800000000000000
+      internalID: 21300068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_35
       rect:
@@ -654,6 +1009,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 66305410000000000800000000000000
+      internalID: 21300070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_36
       rect:
@@ -668,6 +1030,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 86305410000000000800000000000000
+      internalID: 21300072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_37
       rect:
@@ -682,6 +1051,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: a6305410000000000800000000000000
+      internalID: 21300074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_38
       rect:
@@ -696,6 +1072,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: c6305410000000000800000000000000
+      internalID: 21300076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_39
       rect:
@@ -710,6 +1093,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: e6305410000000000800000000000000
+      internalID: 21300078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_40
       rect:
@@ -724,6 +1114,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 07305410000000000800000000000000
+      internalID: 21300080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_41
       rect:
@@ -738,6 +1135,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 27305410000000000800000000000000
+      internalID: 21300082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_42
       rect:
@@ -752,6 +1156,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 47305410000000000800000000000000
+      internalID: 21300084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_43
       rect:
@@ -766,6 +1177,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 67305410000000000800000000000000
+      internalID: 21300086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_44
       rect:
@@ -780,6 +1198,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 87305410000000000800000000000000
+      internalID: 21300088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_45
       rect:
@@ -794,6 +1219,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: a7305410000000000800000000000000
+      internalID: 21300090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_46
       rect:
@@ -808,6 +1240,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: c7305410000000000800000000000000
+      internalID: 21300092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_47
       rect:
@@ -822,6 +1261,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: e7305410000000000800000000000000
+      internalID: 21300094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_48
       rect:
@@ -836,6 +1282,13 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 08305410000000000800000000000000
+      internalID: 21300096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: Dirt_49
       rect:
@@ -850,9 +1303,26 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 28305410000000000800000000000000
+      internalID: 21300098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
   spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
