@@ -11590,6 +11590,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1936908252}
   - component: {fileID: 1936908251}
+  - component: {fileID: 1936908253}
   m_Layer: 0
   m_Name: LevelHandler
   m_TagString: Untagged
@@ -11610,8 +11611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountOfPlayers: 2
-  cam: {fileID: 1317160994}
-  tileMap: {fileID: 478355195}
+  explosionHandler: {fileID: 1936908253}
   playerObject: {fileID: 1164382278641276, guid: 46a18fbc812f2274995f5a2038828e8a,
     type: 3}
   spawnPoints:
@@ -11619,10 +11619,6 @@ MonoBehaviour:
   - {fileID: 746856517}
   - {fileID: 777236169}
   - {fileID: 1729038195}
-  bombPool: {fileID: 1396052829}
-  explosionPool: {fileID: 1119632773}
-  destructableTile: {fileID: 11400000, guid: 64f0e96dd2705ef4fad1cf7bcbb781c9, type: 2}
-  wallTile: {fileID: 11400000, guid: b2b4273f7e0420b4fafe511c16cc33e1, type: 2}
 --- !u!4 &1936908252
 Transform:
   m_ObjectHideFlags: 0
@@ -11637,3 +11633,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1936908253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936908250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcba8d5b8b051f3458a54b2747ed5f8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileMap: {fileID: 478355195}
+  bombPool: {fileID: 1396052829}
+  explosionPool: {fileID: 1119632773}
+  destructableTile: {fileID: 11400000, guid: 64f0e96dd2705ef4fad1cf7bcbb781c9, type: 2}
+  wallTile: {fileID: 11400000, guid: b2b4273f7e0420b4fafe511c16cc33e1, type: 2}

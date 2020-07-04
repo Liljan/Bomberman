@@ -1,18 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using UnityEngine.Tilemaps;
 
-public class LevelHandler : MonoBehaviour
+public class ExplosionHandler : MonoBehaviour
 {
-    public int amountOfPlayers = 2;
-
-    public Camera cam;
     public Tilemap tileMap;
-
-    public GameObject playerObject;
-    public Transform[] spawnPoints;
-    private List<Character> _players;
 
     public ObjectPool bombPool;
     public ObjectPool explosionPool;
@@ -20,23 +14,8 @@ public class LevelHandler : MonoBehaviour
     public TileBase destructableTile;
     public TileBase wallTile;
 
-    // Use this for initialization
-    void Start()
-    {
-        LevelEvents.Instance().ExplodeBomb += SpawnExplosion;
-        LevelEvents.Instance().SpawnBomb += SpawnBomb;
 
-        for (int i = 0; i < amountOfPlayers; i++)
-        {
-            GameObject spawnedPlayer = Instantiate(playerObject, spawnPoints[i].position, Quaternion.identity);
-            Character character = spawnedPlayer.GetComponent<Character>();
-            character.SetID(i + 1);
-           // _players.Add(character);
-        }
-    }
-
-
-    void SpawnBomb(Vector3 pos)
+    public void SpawnBomb(Vector3 pos)
     {
         Vector3Int cell = tileMap.WorldToCell(pos);
         Vector3 cellCenterPosition = tileMap.GetCellCenterWorld(cell);
@@ -44,7 +23,7 @@ public class LevelHandler : MonoBehaviour
         bombPool.SpawnObject(cellCenterPosition, Quaternion.identity);
     }
 
-    void SpawnExplosion(Vector3 pos)
+    public void SpawnExplosion(Vector3 pos)
     {
         Vector3Int cellPos = tileMap.WorldToCell(pos);
 
@@ -54,8 +33,7 @@ public class LevelHandler : MonoBehaviour
         ExplodeCell(cellPos, Vector3Int.right);
     }
 
-
-    void ExplodeCell(Vector3Int pos, Vector3Int dir)
+    private void ExplodeCell(Vector3Int pos, Vector3Int dir)
     {
         TileBase tile = tileMap.GetTile<TileBase>(pos);
         Vector3 cellCenterPosition = tileMap.GetCellCenterWorld(pos);
@@ -74,7 +52,6 @@ public class LevelHandler : MonoBehaviour
 
         // else
         explosionPool.SpawnObject(cellCenterPosition, Quaternion.identity);
-
         ExplodeCell(pos + dir, dir);
     }
 }
