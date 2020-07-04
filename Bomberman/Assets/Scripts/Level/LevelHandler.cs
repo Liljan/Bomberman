@@ -12,23 +12,6 @@ public class LevelHandler : MonoBehaviour
     public Transform[] spawnPoints;
     private List<Character> _players;
 
-    private void OnEnable()
-    {
-        LevelEvents.Instance().SpawnExplosionOrthogonal += explosionHandler.SpawnExplosionOrthogonal;
-        LevelEvents.Instance().SpawnExplosionDiagonal += explosionHandler.SpawnExplosionDiagonal;
-
-        LevelEvents.Instance().SpawnBomb += explosionHandler.SpawnBomb;
-    }
-
-    private void OnDisable()
-    {
-        LevelEvents.Instance().SpawnExplosionOrthogonal -= explosionHandler.SpawnExplosionOrthogonal;
-        LevelEvents.Instance().SpawnExplosionDiagonal -= explosionHandler.SpawnExplosionDiagonal;
-
-        LevelEvents.Instance().SpawnBomb -= explosionHandler.SpawnBomb;
-    }
-
-
     // Use this for initialization
     void Start()
     {

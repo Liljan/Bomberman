@@ -525,6 +525,7 @@ Transform:
   m_Children:
   - {fileID: 1119632772}
   - {fileID: 1396052828}
+  - {fileID: 1409011631}
   m_Father: {fileID: 478355193}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4564,7 +4565,7 @@ GameObject:
   - component: {fileID: 1396052828}
   - component: {fileID: 1396052829}
   m_Layer: 0
-  m_Name: Bombs
+  m_Name: Orthogonal Bombs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4597,6 +4598,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalInstance: {fileID: 1792681462790594, guid: 8bc5ef3d0f683b94bb841cd14b69924b,
+    type: 3}
+  size: 6
+  isExpandable: 1
+  overrideParentGameobject: {fileID: 0}
+--- !u!1 &1409011630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1409011631}
+  - component: {fileID: 1409011632}
+  m_Layer: 0
+  m_Name: Diagonal Bombs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1409011631
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409011630}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 440455835}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1409011632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409011630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee30639a9e92a9243ba130ecabcf4039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalInstance: {fileID: 1792681462790594, guid: 0d810451255e1d34bb09890396af05ba,
     type: 3}
   size: 6
   isExpandable: 1
@@ -11591,6 +11640,7 @@ GameObject:
   - component: {fileID: 1936908252}
   - component: {fileID: 1936908251}
   - component: {fileID: 1936908253}
+  - component: {fileID: 1936908254}
   m_Layer: 0
   m_Name: LevelHandler
   m_TagString: Untagged
@@ -11610,7 +11660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c58b7591a95b3428c44085d67819cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfPlayers: 2
+  amountOfPlayers: 1
   explosionHandler: {fileID: 1936908253}
   playerObject: {fileID: 1164382278641276, guid: 46a18fbc812f2274995f5a2038828e8a,
     type: 3}
@@ -11646,7 +11696,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMap: {fileID: 478355195}
-  bombPool: {fileID: 1396052829}
+  orthogonalBombPool: {fileID: 1396052829}
+  diagonalBombPool: {fileID: 1409011632}
   explosionPool: {fileID: 1119632773}
   destructableTile: {fileID: 11400000, guid: 64f0e96dd2705ef4fad1cf7bcbb781c9, type: 2}
   wallTile: {fileID: 11400000, guid: b2b4273f7e0420b4fafe511c16cc33e1, type: 2}
+--- !u!114 &1936908254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936908250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: decddfc622fc8d143a2a3e6634ae4410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 1317160994}

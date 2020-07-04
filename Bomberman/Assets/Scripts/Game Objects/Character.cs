@@ -108,7 +108,7 @@ public class Character : MonoBehaviour
 
     private void DropBomb()
     {
-        LevelEvents.Instance().InvokeSpawnBomb(transform.position);
+        LevelEvents.Instance().InvokeSpawnOrthogonalBomb(transform.position);
         _bombs--;
         UIEvents.Instance().InvokeUpdateBomb(ID, _bombs);
     }

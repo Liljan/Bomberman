@@ -4,8 +4,10 @@ using UnityEngine;
 public class LevelEvents : MonoBehaviour {
 
     private static LevelEvents instance;
+
     // Level events
-    public event Action<Vector3> SpawnBomb;
+    public event Action<Vector3> SpawnOrthogonalBomb;
+    public event Action<Vector3> SpawnDiagonalBomb;
     public event Action<Vector3> SpawnExplosionOrthogonal;
     public event Action<Vector3> SpawnExplosionDiagonal;
 
@@ -19,11 +21,15 @@ public class LevelEvents : MonoBehaviour {
         return instance;
     }
 
-    public void InvokeSpawnBomb(Vector3 pos)
+    public void InvokeSpawnOrthogonalBomb(Vector3 pos)
     {
-        SpawnBomb.Invoke(pos);
+        SpawnOrthogonalBomb.Invoke(pos);
     }
 
+    public void InvokeSpawnDiagonalBomb(Vector3 pos)
+    {
+        SpawnDiagonalBomb.Invoke(pos);
+    }
     public void InvokeSpawnExplosionOrthogonal(Vector3 pos)
     {
         SpawnExplosionOrthogonal.Invoke(pos);

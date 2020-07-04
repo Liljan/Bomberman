@@ -8,20 +8,48 @@ public class ExplosionHandler : MonoBehaviour
 {
     public Tilemap tileMap;
 
-    public ObjectPool bombPool;
+    public ObjectPool orthogonalBombPool;
+    public ObjectPool diagonalBombPool;
     public ObjectPool explosionPool;
 
     public TileBase destructableTile;
     public TileBase wallTile;
 
+    private void OnEnable()
+    {
+        LevelEvents.Instance().SpawnExplosionOrthogonal += SpawnExplosionOrthogonal;
+        LevelEvents.Instance().SpawnExplosionDiagonal += SpawnExplosionDiagonal;
 
-    public void SpawnBomb(Vector3 pos)
+        LevelEvents.Instance().SpawnOrthogonalBomb += SpawnOrthogonalBomb;
+        LevelEvents.Instance().SpawnDiagonalBomb += SpawnDiagonalBomb;
+    }
+
+    private void OnDisable()
+    {
+        LevelEvents.Instance().SpawnExplosionOrthogonal -= SpawnExplosionOrthogonal;
+        LevelEvents.Instance().SpawnExplosionDiagonal -= SpawnExplosionDiagonal;
+
+        LevelEvents.Instance().SpawnOrthogonalBomb -= SpawnOrthogonalBomb;
+        LevelEvents.Instance().SpawnDiagonalBomb -= SpawnDiagonalBomb;
+    }
+
+
+    public void SpawnOrthogonalBomb(Vector3 pos)
     {
         Vector3Int cell = tileMap.WorldToCell(pos);
         Vector3 cellCenterPosition = tileMap.GetCellCenterWorld(cell);
 
-        bombPool.SpawnObject(cellCenterPosition, Quaternion.identity);
+        orthogonalBombPool.SpawnObject(cellCenterPosition, Quaternion.identity);
     }
+
+    public void SpawnDiagonalBomb(Vector3 pos)
+    {
+        Vector3Int cell = tileMap.WorldToCell(pos);
+        Vector3 cellCenterPosition = tileMap.GetCellCenterWorld(cell);
+
+        diagonalBombPool.SpawnObject(cellCenterPosition, Quaternion.identity);
+    }
+
 
     public void SpawnExplosionOrthogonal(Vector3 pos)
     {

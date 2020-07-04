@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bomb : MonoBehaviour {
+public class OrthogonalBomb : MonoBehaviour {
 
     public float countdown = 2.0f;
     private float countdownTimer;
@@ -18,8 +18,8 @@ public class Bomb : MonoBehaviour {
 
         if(countdownTimer <= 0.0f)
         {
-            //LevelEvents.Instance().InvokeSpawnExplosionDiagonal(this.transform.position);
             LevelEvents.Instance().InvokeSpawnExplosionOrthogonal(this.transform.position);
+
             this.gameObject.SetActive(false);
         }
 	}
