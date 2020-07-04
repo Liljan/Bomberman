@@ -8,28 +8,33 @@ public class ObjectPool : MonoBehaviour
     public int size;
     public bool isExpandable;
 
-    private List<GameObject> _pool;
+    public Transform overrideParentGameobject = null;
 
+    private List<GameObject> _pool;
 
     private void Awake()
     {
+        Debug.Assert(originalInstance);
+
         _pool = new List<GameObject>(size);
+
+        Transform spawnedObjectParent = overrideParentGameobject != null ? overrideParentGameobject : this.transform;
 
         for (int i = 0; i < size; i++)
         {
-            GameObject newGameObject = (GameObject)Instantiate(originalInstance);
+            GameObject newGameObject = (GameObject)Instantiate(originalInstance, this.transform);
             newGameObject.SetActive(false);
-            // _pool[i] = newGameObject;
+           
             _pool.Add(newGameObject);
         }
     }
 
     public bool SpawnObject(Vector3 position, Quaternion rotation)
     {
-        for (int i = 0; i < _pool.Count; i++)
+        for(int i = 0; i < _pool.Count; i++)
         {
             GameObject obj = _pool[i];
-            if (!obj.activeInHierarchy)
+            if(!obj.activeInHierarchy)
             {
                 obj.transform.position = position;
                 obj.transform.rotation = rotation;
@@ -39,9 +44,11 @@ public class ObjectPool : MonoBehaviour
             }
         }
 
-        if (isExpandable)
+        if(isExpandable)
         {
-            GameObject obj = Instantiate(originalInstance);
+            Transform spawnedObjectParent = overrideParentGameobject != null ? overrideParentGameobject : this.transform;
+
+            GameObject obj = Instantiate(originalInstance, spawnedObjectParent);
             obj.transform.position = position;
             obj.transform.rotation = rotation;
             obj.SetActive(true);
@@ -51,6 +58,7 @@ public class ObjectPool : MonoBehaviour
             return true;
         }
 
+        Debug.Log("Object Pool maxed out: " + this.gameObject.name);
         return false;
     }
 }
