@@ -14,13 +14,17 @@ public class LevelHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        LevelEvents.Instance().ExplodeBomb += explosionHandler.SpawnExplosion;
+        LevelEvents.Instance().SpawnExplosionOrthogonal += explosionHandler.SpawnExplosionOrthogonal;
+        LevelEvents.Instance().SpawnExplosionDiagonal += explosionHandler.SpawnExplosionDiagonal;
+
         LevelEvents.Instance().SpawnBomb += explosionHandler.SpawnBomb;
     }
 
     private void OnDisable()
     {
-        LevelEvents.Instance().ExplodeBomb -= explosionHandler.SpawnExplosion;
+        LevelEvents.Instance().SpawnExplosionOrthogonal -= explosionHandler.SpawnExplosionOrthogonal;
+        LevelEvents.Instance().SpawnExplosionDiagonal -= explosionHandler.SpawnExplosionDiagonal;
+
         LevelEvents.Instance().SpawnBomb -= explosionHandler.SpawnBomb;
     }
 

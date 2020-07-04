@@ -23,7 +23,7 @@ public class ExplosionHandler : MonoBehaviour
         bombPool.SpawnObject(cellCenterPosition, Quaternion.identity);
     }
 
-    public void SpawnExplosion(Vector3 pos)
+    public void SpawnExplosionOrthogonal(Vector3 pos)
     {
         Vector3Int cellPos = tileMap.WorldToCell(pos);
 
@@ -33,15 +33,23 @@ public class ExplosionHandler : MonoBehaviour
         ExplodeCell(cellPos, Vector3Int.right);
     }
 
+    public void SpawnExplosionDiagonal(Vector3 pos)
+    {
+        Vector3Int cellPos = tileMap.WorldToCell(pos);
+
+        ExplodeCell(cellPos, new Vector3Int(1, 1, 0));
+        ExplodeCell(cellPos, new Vector3Int(-1, 1, 0));
+        ExplodeCell(cellPos, new Vector3Int(1, -1, 0));
+        ExplodeCell(cellPos, new Vector3Int(-1, -1, 0));
+    }
+
     private void ExplodeCell(Vector3Int pos, Vector3Int dir)
     {
         TileBase tile = tileMap.GetTile<TileBase>(pos);
         Vector3 cellCenterPosition = tileMap.GetCellCenterWorld(pos);
 
         if (tile == wallTile)
-        {
             return;
-        }
 
         if (tile == destructableTile)
         {
@@ -51,7 +59,13 @@ public class ExplosionHandler : MonoBehaviour
         }
 
         // else
-        explosionPool.SpawnObject(cellCenterPosition, Quaternion.identity);
-        ExplodeCell(pos + dir, dir);
+        StartCoroutine(SpawnExplosionDelay(pos + dir, dir));
+    }
+
+    private IEnumerator SpawnExplosionDelay(Vector3Int position, Vector3Int direction)
+    {
+        yield return new WaitForSeconds(0.01f);
+        explosionPool.SpawnObject(position, Quaternion.identity);
+        ExplodeCell(position, direction);
     }
 }

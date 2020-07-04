@@ -6,7 +6,8 @@ public class LevelEvents : MonoBehaviour {
     private static LevelEvents instance;
     // Level events
     public event Action<Vector3> SpawnBomb;
-    public event Action<Vector3> ExplodeBomb;
+    public event Action<Vector3> SpawnExplosionOrthogonal;
+    public event Action<Vector3> SpawnExplosionDiagonal;
 
     private void Awake()
     {
@@ -23,9 +24,14 @@ public class LevelEvents : MonoBehaviour {
         SpawnBomb.Invoke(pos);
     }
 
-    public void InvokeExplodeBomb(Vector3 pos)
+    public void InvokeSpawnExplosionOrthogonal(Vector3 pos)
     {
-        ExplodeBomb.Invoke(pos);
+        SpawnExplosionOrthogonal.Invoke(pos);
+    }
+
+    public void InvokeSpawnExplosionDiagonal(Vector3 pos)
+    {
+        SpawnExplosionDiagonal.Invoke(pos);
     }
 
 }

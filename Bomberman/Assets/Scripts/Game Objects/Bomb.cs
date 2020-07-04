@@ -18,7 +18,8 @@ public class Bomb : MonoBehaviour {
 
         if(countdownTimer <= 0.0f)
         {
-            LevelEvents.Instance().InvokeExplodeBomb(transform.position);
+            //LevelEvents.Instance().InvokeSpawnExplosionDiagonal(this.transform.position);
+            LevelEvents.Instance().InvokeSpawnExplosionOrthogonal(this.transform.position);
             this.gameObject.SetActive(false);
         }
 	}
