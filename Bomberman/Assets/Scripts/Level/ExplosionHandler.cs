@@ -106,7 +106,8 @@ public class ExplosionHandler : MonoBehaviour
     private IEnumerator SpawnExplosionDelay(Vector3Int position, Vector3Int direction)
     {
         yield return new WaitForSeconds(0.01f);
-        explosionPool.SpawnObject(position, Quaternion.identity);
+        Vector3 cellCenterPosition = tileMap.GetCellCenterWorld(position);
+        explosionPool.SpawnObject(cellCenterPosition, Quaternion.identity);
         ExplodeCell(position, direction);
     }
 }
