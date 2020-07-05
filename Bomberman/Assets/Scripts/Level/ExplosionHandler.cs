@@ -55,6 +55,8 @@ public class ExplosionHandler : MonoBehaviour
     {
         Vector3Int cellPos = tileMap.WorldToCell(pos);
 
+        ExplodeCell(cellPos, Vector3Int.zero);
+
         ExplodeCell(cellPos, Vector3Int.up);
         ExplodeCell(cellPos, Vector3Int.down);
         ExplodeCell(cellPos, Vector3Int.left);
@@ -64,6 +66,8 @@ public class ExplosionHandler : MonoBehaviour
     public void SpawnExplosionDiagonal(Vector3 pos)
     {
         Vector3Int cellPos = tileMap.WorldToCell(pos);
+
+        ExplodeCell(cellPos, Vector3Int.zero);
 
         ExplodeCell(cellPos, new Vector3Int(1, 1, 0));
         ExplodeCell(cellPos, new Vector3Int(-1, 1, 0));
@@ -85,6 +89,15 @@ public class ExplosionHandler : MonoBehaviour
             tileMap.SetTile(pos, null);
             return;
         }
+
+        // If there is no propagation direction:
+        // Spawn one explosion here with no propagation
+        if(dir == Vector3Int.zero)
+        {
+            explosionPool.SpawnObject(cellCenterPosition, Quaternion.identity);
+            return;
+        }
+           
 
         // else
         StartCoroutine(SpawnExplosionDelay(pos + dir, dir));
