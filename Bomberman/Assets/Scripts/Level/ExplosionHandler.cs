@@ -57,10 +57,10 @@ public class ExplosionHandler : MonoBehaviour
 
         ExplodeCell(cellPos, Vector3Int.zero);
 
-        ExplodeCell(cellPos, Vector3Int.up);
-        ExplodeCell(cellPos, Vector3Int.down);
-        ExplodeCell(cellPos, Vector3Int.left);
-        ExplodeCell(cellPos, Vector3Int.right);
+        ExplodeCell(cellPos + Vector3Int.up, Vector3Int.up);
+        ExplodeCell(cellPos + Vector3Int.down, Vector3Int.down);
+        ExplodeCell(cellPos + Vector3Int.left, Vector3Int.left);
+        ExplodeCell(cellPos + Vector3Int.right, Vector3Int.right);
     }
 
     public void SpawnExplosionDiagonal(Vector3 pos)
@@ -69,10 +69,25 @@ public class ExplosionHandler : MonoBehaviour
 
         ExplodeCell(cellPos, Vector3Int.zero);
 
-        ExplodeCell(cellPos, new Vector3Int(1, 1, 0));
-        ExplodeCell(cellPos, new Vector3Int(-1, 1, 0));
-        ExplodeCell(cellPos, new Vector3Int(1, -1, 0));
-        ExplodeCell(cellPos, new Vector3Int(-1, -1, 0));
+        {
+            Vector3Int dir = new Vector3Int(-1, -1, 0);
+            ExplodeCell(cellPos + dir, dir);
+        }
+
+        {
+            Vector3Int dir = new Vector3Int(1, -1, 0);
+            ExplodeCell(cellPos + dir, dir);
+        }
+
+        {
+            Vector3Int dir = new Vector3Int(-1, 1, 0);
+            ExplodeCell(cellPos + dir, dir);
+        }
+
+        {
+            Vector3Int dir = new Vector3Int(1, 1, 0);
+            ExplodeCell(cellPos + dir, dir);
+        }
     }
 
     private void ExplodeCell(Vector3Int pos, Vector3Int dir)
@@ -96,18 +111,17 @@ public class ExplosionHandler : MonoBehaviour
         {
             explosionPool.SpawnObject(cellCenterPosition, Quaternion.identity);
             return;
-        }
-           
+        }  
 
         // else
-        StartCoroutine(SpawnExplosionDelay(pos + dir, dir));
+        StartCoroutine(SpawnExplosionDelay(pos, dir));
     }
 
     private IEnumerator SpawnExplosionDelay(Vector3Int position, Vector3Int direction)
-    {
-        yield return new WaitForSeconds(0.01f);
+    {  
         Vector3 cellCenterPosition = tileMap.GetCellCenterWorld(position);
         explosionPool.SpawnObject(cellCenterPosition, Quaternion.identity);
-        ExplodeCell(position, direction);
+        yield return new WaitForSeconds(0.01f);
+        ExplodeCell(position + direction, direction);
     }
 }
