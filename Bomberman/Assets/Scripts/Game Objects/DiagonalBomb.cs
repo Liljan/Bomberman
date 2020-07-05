@@ -12,15 +12,25 @@ public class DiagonalBomb : MonoBehaviour {
         countdownTimer = countdown;
     }
 
+    private 
+
     // Update is called once per frame
     void Update () {
         countdownTimer -= Time.deltaTime;
 
         if(countdownTimer <= 0.0f)
-        {
-            LevelEvents.Instance().InvokeSpawnExplosionDiagonal(this.transform.position);
-
-            this.gameObject.SetActive(false);
-        }
+            Explode();
 	}
+
+    private void Explode()
+    {
+        LevelEvents.Instance().InvokeSpawnExplosionDiagonal(this.transform.position);
+        this.gameObject.SetActive(false);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Explosion")
+            Explode();
+    }
 }

@@ -4183,7 +4183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalInstance: {fileID: 1630139361789628, guid: 15d3134b23365644298a00267caaf708,
     type: 3}
-  size: 10
+  size: 100
   isExpandable: 1
   overrideParentGameobject: {fileID: 0}
 --- !u!1 &1206721726
