@@ -17,6 +17,14 @@ public class ExplosionHandler : MonoBehaviour
 
     public LayerMask _ObjectLayers;
 
+    private Bounds _levelBounds;
+
+    private void Awake()
+    {
+        CompositeCollider2D collider = _tileMap.gameObject.GetComponent<CompositeCollider2D>();
+        _levelBounds = collider.bounds;
+    }
+
     private void OnEnable()
     {
         LevelEvents.Instance().SpawnExplosionOrthogonal += SpawnExplosionOrthogonal;
@@ -38,6 +46,12 @@ public class ExplosionHandler : MonoBehaviour
 
     public void TrySpawnOrthogonalBomb(Vector3 pos, Character player = null)
     {
+        if (!_levelBounds.Contains(pos))
+        {
+            player?.CallbackDropOrthogonalBomb(false);
+            return;
+        }
+
         Vector3Int cell = _tileMap.WorldToCell(pos);
         Vector3 cellCenterPosition = _tileMap.GetCellCenterWorld(cell);
 

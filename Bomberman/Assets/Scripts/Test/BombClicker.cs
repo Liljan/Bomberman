@@ -24,9 +24,7 @@ public class BombClicker : MonoBehaviour
 
    private Vector3 MousePositionWorld()
     {
-        Vector3 pos = Input.mousePosition;
-        pos.z = 0.0f;
-
-        return camera.ScreenToWorldPoint(pos);
+        Vector3 worldPoint = camera.ScreenToWorldPoint(Input.mousePosition);
+        return new Vector3(worldPoint.x, worldPoint.y, 0.0f);
     }
 }
