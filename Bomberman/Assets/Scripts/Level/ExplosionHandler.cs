@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 public class ExplosionHandler : MonoBehaviour
 {
     public Tilemap _tileMap;
+    public Tilemap _gameArea;
 
     public ObjectPool _orthogonalBombPool;
     public ObjectPool _diagonalBombPool;
@@ -17,12 +18,8 @@ public class ExplosionHandler : MonoBehaviour
 
     public LayerMask _ObjectLayers;
 
-    private Bounds _levelBounds;
-
     private void Awake()
     {
-        CompositeCollider2D collider = _tileMap.gameObject.GetComponent<CompositeCollider2D>();
-        _levelBounds = collider.bounds;
     }
 
     private void OnEnable()
@@ -43,24 +40,23 @@ public class ExplosionHandler : MonoBehaviour
         LevelEvents.Instance().SpawnDiagonalBomb -= SpawnDiagonalBomb;
     }
 
+    private bool IsInsideGameArea(Vector3Int point)
+    {
+        return _gameArea.GetTile<TileBase>(point) != null;
+    }
+
 
     public void TrySpawnOrthogonalBomb(Vector3 pos, Character player = null)
     {
-        if (!_levelBounds.Contains(pos))
-        {
-            player?.CallbackDropOrthogonalBomb(false);
-            return;
-        }
-
         Vector3Int cell = _tileMap.WorldToCell(pos);
-        Vector3 cellCenterPosition = _tileMap.GetCellCenterWorld(cell);
 
-        if(!IsTileEmpty(cell))
+        if(!IsInsideGameArea(cell) || !IsTileEmpty(cell))
         {
             player?.CallbackDropOrthogonalBomb(false);
             return;
         } 
 
+        Vector3 cellCenterPosition = _tileMap.GetCellCenterWorld(cell);
         bool result = _orthogonalBombPool.SpawnObject(cellCenterPosition, Quaternion.identity);
         player?.CallbackDropOrthogonalBomb(result);
     }
@@ -151,10 +147,13 @@ public class ExplosionHandler : MonoBehaviour
 
     private bool IsTileEmpty(Vector3Int cell)
     {
-        Vector3 cellCenterPosition = _tileMap.GetCellCenterWorld(cell);
+        TileBase tile = _tileMap.GetTile<TileBase>(cell);
+
+        if(tile == _destructableTile || tile == _wallTile)
+            return false;
 
         var tileBounds = _tileMap.GetBoundsLocal(cell);
-
-        return !Physics2D.OverlapBox(cellCenterPosition, 0.5f * tileBounds.size, 0.0f, _ObjectLayers);
+        Vector3 position = _tileMap.GetCellCenterWorld(cell);
+        return !Physics2D.OverlapBox(position, 0.5f * tileBounds.size, 0.0f, _ObjectLayers);
     }
 }
