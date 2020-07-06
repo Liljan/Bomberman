@@ -17,7 +17,7 @@ public class BombClicker : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown("1"))
-            LevelEvents.Instance().InvokeSpawnOrthogonalBomb(MousePositionWorld());
+            LevelEvents.Instance().InvokeTrySpawnOrthogonalBomb(MousePositionWorld());
         else if (Input.GetKeyDown("2"))
             LevelEvents.Instance().InvokeSpawnDiagonalBomb(MousePositionWorld());
     }

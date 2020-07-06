@@ -59,11 +59,11 @@ public class Character : MonoBehaviour
 
     private void RechargeBombs()
     {
-        if (_bombs < bombsMax)
+        if(_bombs < bombsMax)
         {
             _bombRechargeTimer -= Time.deltaTime;
 
-            if (_bombRechargeTimer <= 0.0f)
+            if(_bombRechargeTimer <= 0.0f)
             {
                 _bombRechargeTimer = bombRechargeTime;
                 _bombs++;
@@ -81,7 +81,7 @@ public class Character : MonoBehaviour
 
         if (Input.GetButtonDown(ActionButton) && _bombs > 0)
         {
-            DropBomb();
+            TryDropOrthogonalBomb();
         }
 
         RechargeBombs();
@@ -106,9 +106,16 @@ public class Character : MonoBehaviour
     }
 
 
-    private void DropBomb()
+    private void TryDropOrthogonalBomb()
     {
-        LevelEvents.Instance().InvokeSpawnOrthogonalBomb(transform.position);
+        LevelEvents.Instance().InvokeTrySpawnOrthogonalBomb(transform.position, this);
+    }
+
+    public void CallbackDropOrthogonalBomb(bool result)
+    {
+        if(!result)
+            return;
+
         _bombs--;
         UIEvents.Instance().InvokeUpdateBomb(ID, _bombs);
     }

@@ -22,7 +22,7 @@ public class ExplosionHandler : MonoBehaviour
         LevelEvents.Instance().SpawnExplosionOrthogonal += SpawnExplosionOrthogonal;
         LevelEvents.Instance().SpawnExplosionDiagonal += SpawnExplosionDiagonal;
 
-        LevelEvents.Instance().SpawnOrthogonalBomb += SpawnOrthogonalBomb;
+        LevelEvents.Instance().TrySpawnOrthogonalBomb += TrySpawnOrthogonalBomb;
         LevelEvents.Instance().SpawnDiagonalBomb += SpawnDiagonalBomb;
     }
 
@@ -31,23 +31,24 @@ public class ExplosionHandler : MonoBehaviour
         LevelEvents.Instance().SpawnExplosionOrthogonal -= SpawnExplosionOrthogonal;
         LevelEvents.Instance().SpawnExplosionDiagonal -= SpawnExplosionDiagonal;
 
-        LevelEvents.Instance().SpawnOrthogonalBomb -= SpawnOrthogonalBomb;
+        LevelEvents.Instance().TrySpawnOrthogonalBomb -= TrySpawnOrthogonalBomb;
         LevelEvents.Instance().SpawnDiagonalBomb -= SpawnDiagonalBomb;
     }
 
 
-    public void SpawnOrthogonalBomb(Vector3 pos)
+    public void TrySpawnOrthogonalBomb(Vector3 pos, Character player = null)
     {
         Vector3Int cell = _tileMap.WorldToCell(pos);
         Vector3 cellCenterPosition = _tileMap.GetCellCenterWorld(cell);
 
-        if (IsTileEmpty(cell))
-            _orthogonalBombPool.SpawnObject(cellCenterPosition, Quaternion.identity);
-        else
+        if(!IsTileEmpty(cell))
         {
-            int bobobob = 123;
-        }
-            
+            player?.CallbackDropOrthogonalBomb(false);
+            return;
+        } 
+
+        bool result = _orthogonalBombPool.SpawnObject(cellCenterPosition, Quaternion.identity);
+        player?.CallbackDropOrthogonalBomb(result);
     }
 
     public void SpawnDiagonalBomb(Vector3 pos)
