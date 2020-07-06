@@ -11695,12 +11695,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcba8d5b8b051f3458a54b2747ed5f8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileMap: {fileID: 478355195}
-  orthogonalBombPool: {fileID: 1396052829}
-  diagonalBombPool: {fileID: 1409011632}
-  explosionPool: {fileID: 1119632773}
-  destructableTile: {fileID: 11400000, guid: 64f0e96dd2705ef4fad1cf7bcbb781c9, type: 2}
-  wallTile: {fileID: 11400000, guid: b2b4273f7e0420b4fafe511c16cc33e1, type: 2}
+  _tileMap: {fileID: 478355195}
+  _orthogonalBombPool: {fileID: 1396052829}
+  _diagonalBombPool: {fileID: 1409011632}
+  _explosionPool: {fileID: 1119632773}
+  _destructableTile: {fileID: 11400000, guid: 64f0e96dd2705ef4fad1cf7bcbb781c9, type: 2}
+  _wallTile: {fileID: 11400000, guid: b2b4273f7e0420b4fafe511c16cc33e1, type: 2}
+  _ObjectLayers:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &1936908254
 MonoBehaviour:
   m_ObjectHideFlags: 0

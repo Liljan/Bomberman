@@ -6,14 +6,16 @@ using UnityEngine.Tilemaps;
 
 public class ExplosionHandler : MonoBehaviour
 {
-    public Tilemap tileMap;
+    public Tilemap _tileMap;
 
-    public ObjectPool orthogonalBombPool;
-    public ObjectPool diagonalBombPool;
-    public ObjectPool explosionPool;
+    public ObjectPool _orthogonalBombPool;
+    public ObjectPool _diagonalBombPool;
+    public ObjectPool _explosionPool;
 
-    public TileBase destructableTile;
-    public TileBase wallTile;
+    public TileBase _destructableTile;
+    public TileBase _wallTile;
+
+    public LayerMask _ObjectLayers;
 
     private void OnEnable()
     {
@@ -36,24 +38,24 @@ public class ExplosionHandler : MonoBehaviour
 
     public void SpawnOrthogonalBomb(Vector3 pos)
     {
-        Vector3Int cell = tileMap.WorldToCell(pos);
-        Vector3 cellCenterPosition = tileMap.GetCellCenterWorld(cell);
+        Vector3Int cell = _tileMap.WorldToCell(pos);
+        Vector3 cellCenterPosition = _tileMap.GetCellCenterWorld(cell);
 
-        orthogonalBombPool.SpawnObject(cellCenterPosition, Quaternion.identity);
+        _orthogonalBombPool.SpawnObject(cellCenterPosition, Quaternion.identity);
     }
 
     public void SpawnDiagonalBomb(Vector3 pos)
     {
-        Vector3Int cell = tileMap.WorldToCell(pos);
-        Vector3 cellCenterPosition = tileMap.GetCellCenterWorld(cell);
+        Vector3Int cell = _tileMap.WorldToCell(pos);
+        Vector3 cellCenterPosition = _tileMap.GetCellCenterWorld(cell);
 
-        diagonalBombPool.SpawnObject(cellCenterPosition, Quaternion.identity);
+        _diagonalBombPool.SpawnObject(cellCenterPosition, Quaternion.identity);
     }
 
 
     public void SpawnExplosionOrthogonal(Vector3 pos)
     {
-        Vector3Int cellPos = tileMap.WorldToCell(pos);
+        Vector3Int cellPos = _tileMap.WorldToCell(pos);
 
         ExplodeCell(cellPos, Vector3Int.zero);
 
@@ -65,7 +67,7 @@ public class ExplosionHandler : MonoBehaviour
 
     public void SpawnExplosionDiagonal(Vector3 pos)
     {
-        Vector3Int cellPos = tileMap.WorldToCell(pos);
+        Vector3Int cellPos = _tileMap.WorldToCell(pos);
 
         ExplodeCell(cellPos, Vector3Int.zero);
 
@@ -92,16 +94,16 @@ public class ExplosionHandler : MonoBehaviour
 
     private void ExplodeCell(Vector3Int pos, Vector3Int dir)
     {
-        TileBase tile = tileMap.GetTile<TileBase>(pos);
-        Vector3 cellCenterPosition = tileMap.GetCellCenterWorld(pos);
+        TileBase tile = _tileMap.GetTile<TileBase>(pos);
+        Vector3 cellCenterPosition = _tileMap.GetCellCenterWorld(pos);
 
-        if (tile == wallTile)
+        if (tile == _wallTile)
             return;
 
-        if (tile == destructableTile)
+        if (tile == _destructableTile)
         {
             //explosionPool.SpawnObject(cellCenterPosition, Quaternion.identity);
-            tileMap.SetTile(pos, null);
+            _tileMap.SetTile(pos, null);
             return;
         }
 
@@ -109,7 +111,7 @@ public class ExplosionHandler : MonoBehaviour
         // Spawn one explosion here with no propagation
         if(dir == Vector3Int.zero)
         {
-            explosionPool.SpawnObject(cellCenterPosition, Quaternion.identity);
+            _explosionPool.SpawnObject(cellCenterPosition, Quaternion.identity);
             return;
         }  
 
@@ -119,9 +121,21 @@ public class ExplosionHandler : MonoBehaviour
 
     private IEnumerator SpawnExplosionDelay(Vector3Int position, Vector3Int direction)
     {  
-        Vector3 cellCenterPosition = tileMap.GetCellCenterWorld(position);
-        explosionPool.SpawnObject(cellCenterPosition, Quaternion.identity);
+        Vector3 cellCenterPosition = _tileMap.GetCellCenterWorld(position);
+        _explosionPool.SpawnObject(cellCenterPosition, Quaternion.identity);
         yield return new WaitForSeconds(0.01f);
         ExplodeCell(position + direction, direction);
     }
+
+
+    //private bool IsTileEmpty(Vector3Int cell)
+    //{
+
+    //    Vector3 cellCenterPosition = _tileMap.GetCellCenterWorld(cell);
+
+    //    var bounds = _tileMap.GetBoundsLocal(cell);
+
+    //    Collider2D[] hitColliders = Physics2D.OverlapBox(cellCenterPosition, bounds.size, 0.0f, _ObjectLayers);
+    //    return false;
+    //}
 }
