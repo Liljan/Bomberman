@@ -41,7 +41,13 @@ public class ExplosionHandler : MonoBehaviour
         Vector3Int cell = _tileMap.WorldToCell(pos);
         Vector3 cellCenterPosition = _tileMap.GetCellCenterWorld(cell);
 
-        _orthogonalBombPool.SpawnObject(cellCenterPosition, Quaternion.identity);
+        if (IsTileEmpty(cell))
+            _orthogonalBombPool.SpawnObject(cellCenterPosition, Quaternion.identity);
+        else
+        {
+            int bobobob = 123;
+        }
+            
     }
 
     public void SpawnDiagonalBomb(Vector3 pos)
@@ -128,14 +134,12 @@ public class ExplosionHandler : MonoBehaviour
     }
 
 
-    //private bool IsTileEmpty(Vector3Int cell)
-    //{
+    private bool IsTileEmpty(Vector3Int cell)
+    {
+        Vector3 cellCenterPosition = _tileMap.GetCellCenterWorld(cell);
 
-    //    Vector3 cellCenterPosition = _tileMap.GetCellCenterWorld(cell);
+        var tileBounds = _tileMap.GetBoundsLocal(cell);
 
-    //    var bounds = _tileMap.GetBoundsLocal(cell);
-
-    //    Collider2D[] hitColliders = Physics2D.OverlapBox(cellCenterPosition, bounds.size, 0.0f, _ObjectLayers);
-    //    return false;
-    //}
+        return !Physics2D.OverlapBox(cellCenterPosition, 0.5f * tileBounds.size, 0.0f, _ObjectLayers);
+    }
 }
