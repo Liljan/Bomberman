@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class BombClicker : MonoBehaviour
 {
-    public Camera camera;
-
+    public Camera m_Camera;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +23,7 @@ public class BombClicker : MonoBehaviour
 
    private Vector3 MousePositionWorld()
     {
-        Vector3 worldPoint = camera.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 worldPoint = m_Camera.ScreenToWorldPoint(Input.mousePosition);
         return new Vector3(worldPoint.x, worldPoint.y, 0.0f);
     }
 }

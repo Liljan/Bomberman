@@ -2,72 +2,68 @@
 
 public class Character : MonoBehaviour
 {
-    private string HorizontalAxis;
-    private string VerticalAxis;
-    private string ActionButton;
+    private string m_HorizontalAxis;
+    private string m_VerticalAxis;
+    private string m_ActionButton;
 
-    public int ID;
-    public float speed = 1.0f;
+    public int m_Id;
+    public float m_Speed = 1.0f;
 
-    public int bombsMax = 3;
-    private int _bombs;
-    public float bombRechargeTime = 3.0f;
-    private float _bombRechargeTimer;
+    public int m_BombsMax = 3;
+    private int m_Bombs;
+    public float m_BombRechargeTime = 3.0f;
+    private float m_BombRechargeTimer;
 
-    public int healthMax = 3;
-    private int _health;
+    public int m_HealthMax = 3;
+    private int m_Health;
 
-    private Rigidbody2D _rb2d;
-    private Animator _animator;
-
+    private Rigidbody2D m_Rb2d;
+    private Animator m_Animator;
 
     private void Awake()
     {
-        _rb2d = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
+        m_Rb2d = GetComponent<Rigidbody2D>();
+        m_Animator = GetComponent<Animator>();
     }
-
 
     private void OnEnable()
     {
-        _bombs = bombsMax;
-        _health = healthMax;
-        _bombRechargeTimer = bombRechargeTime;
+        m_Bombs = m_BombsMax;
+        m_Health = m_HealthMax;
+        m_BombRechargeTimer = m_BombRechargeTime;
     }
-
 
     private void Start()
     {
-        UIEvents.Instance().InvokeUpdateHealth(ID, _health);
-        UIEvents.Instance().InvokeUpdateBomb(ID, _bombs);
+        UIEvents.Instance().InvokeUpdateHealth(m_Id, m_Health);
+        UIEvents.Instance().InvokeUpdateBomb(m_Id, m_Bombs);
     }
-
 
     private void MoveWithSticks()
     {
-        float x = Input.GetAxis(HorizontalAxis);
-        float y = Input.GetAxis(VerticalAxis);
+        float x = Input.GetAxis(m_HorizontalAxis);
+        float y = Input.GetAxis(m_VerticalAxis);
 
-        _rb2d.velocity = new Vector3(x * speed, y * speed, 0.0f);
+        m_Rb2d.velocity = new Vector3(x * m_Speed, y * m_Speed, 0.0f);
 
-        _animator.SetBool("Left", x > 0.05f);
-        _animator.SetBool("Right", x < -0.05f);
-        _animator.SetBool("Up", y > 0.05f);
-        _animator.SetBool("Down", y < -0.05f);
+        m_Animator.SetBool("Left", x > 0.05f);
+        m_Animator.SetBool("Right", x < -0.05f);
+        m_Animator.SetBool("Up", y > 0.05f);
+        m_Animator.SetBool("Down", y < -0.05f);
     }
 
 
     private void RechargeBombs()
     {
-        if(_bombs < bombsMax)
+        if(m_Bombs < m_BombsMax)
         {
-            _bombRechargeTimer -= Time.deltaTime;
+            m_BombRechargeTimer -= Time.deltaTime;
 
-            if(_bombRechargeTimer <= 0.0f)
+            if(m_BombRechargeTimer <= 0.0f)
             {
-                _bombRechargeTimer = bombRechargeTime;
-                _bombs++;
-                UIEvents.Instance().InvokeUpdateBomb(ID, _bombs);
+                m_BombRechargeTimer = m_BombRechargeTime;
+                m_Bombs++;
+                UIEvents.Instance().InvokeUpdateBomb(m_Id, m_Bombs);
             }
         }
     }
@@ -79,7 +75,7 @@ public class Character : MonoBehaviour
         //MoveStickSensitivity();
         MoveWithSticks();
 
-        if(Input.GetButtonDown(ActionButton) && _bombs > 0)
+        if(Input.GetButtonDown(m_ActionButton) && m_Bombs > 0)
         {
             TryDropOrthogonalBomb();
         }
@@ -90,19 +86,19 @@ public class Character : MonoBehaviour
 
     public void SetID(int ID)
     {
-        this.ID = ID;
+        this.m_Id = ID;
 
-        HorizontalAxis = InputMapping.LEFT_HORIZONTAL[ID - 1];
-        VerticalAxis = InputMapping.LEFT_VERTICAL[ID - 1];
-        ActionButton = InputMapping.ACTION[ID - 1];
+        m_HorizontalAxis = InputMapping.LEFT_HORIZONTAL[ID - 1];
+        m_VerticalAxis = InputMapping.LEFT_VERTICAL[ID - 1];
+        m_ActionButton = InputMapping.ACTION[ID - 1];
     }
 
 
     private void TakeDamage(int damage)
     {
-        _health -= damage;
-        _health = Mathf.Max(0, _health);
-        UIEvents.Instance().InvokeUpdateHealth(ID, _health);
+        m_Health -= damage;
+        m_Health = Mathf.Max(0, m_Health);
+        UIEvents.Instance().InvokeUpdateHealth(m_Id, m_Health);
     }
 
 
@@ -116,8 +112,8 @@ public class Character : MonoBehaviour
         if(!result)
             return;
 
-        _bombs--;
-        UIEvents.Instance().InvokeUpdateBomb(ID, _bombs);
+        m_Bombs--;
+        UIEvents.Instance().InvokeUpdateBomb(m_Id, m_Bombs);
     }
 
 

@@ -61,7 +61,7 @@ public class ObjectPoolManager : MonoBehaviour
     private void Init()
     {
         foreach(ObjectPool pool in m_ObjectPools)
-            m_PoolMap.Add(pool.originalInstance.GetInstanceID(), pool);
+            m_PoolMap.Add(pool.m_OriginalInstance.GetInstanceID(), pool);
     }
 
     public bool Spawn(int prefabID, Vector3 position, Quaternion rotation)

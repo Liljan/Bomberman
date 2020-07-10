@@ -4,36 +4,36 @@ using System.Collections.Generic;
 
 public class ObjectPool : MonoBehaviour
 {
-    public GameObject originalInstance;
-    public int startSize;
-    public bool isExpandable;
+    public GameObject m_OriginalInstance;
+    public int m_StartSize;
+    public bool m_IsExpandable;
 
-    public Transform overrideParentGameobject = null;
+    public Transform m_OverrideParentGameObject = null;
 
-    private List<GameObject> _pool;
+    private List<GameObject> m_Pool;
 
     private void Awake()
     {
-        Debug.Assert(originalInstance);
+        Debug.Assert(m_OriginalInstance);
 
-        _pool = new List<GameObject>(startSize);
+        m_Pool = new List<GameObject>(m_StartSize);
 
-        Transform spawnedObjectParent = overrideParentGameobject != null ? overrideParentGameobject : this.transform;
+        Transform spawnedObjectParent = m_OverrideParentGameObject != null ? m_OverrideParentGameObject : this.transform;
 
-        for(int i = 0; i < startSize; i++)
+        for(int i = 0; i < m_StartSize; i++)
         {
-            GameObject newGameObject =(GameObject)Instantiate(originalInstance, this.transform);
+            GameObject newGameObject =(GameObject)Instantiate(m_OriginalInstance, this.transform);
             newGameObject.SetActive(false);
            
-            _pool.Add(newGameObject);
+            m_Pool.Add(newGameObject);
         }
     }
 
     public bool SpawnObject(Vector3 position, Quaternion rotation)
     {
-        for(int i = 0; i < _pool.Count; i++)
+        for(int i = 0; i < m_Pool.Count; i++)
         {
-            GameObject obj = _pool[i];
+            GameObject obj = m_Pool[i];
             if(!obj.activeInHierarchy)
             {
                 obj.transform.position = position;
@@ -44,16 +44,16 @@ public class ObjectPool : MonoBehaviour
             }
         }
 
-        if(isExpandable)
+        if(m_IsExpandable)
         {
-            Transform spawnedObjectParent = overrideParentGameobject != null ? overrideParentGameobject : this.transform;
+            Transform spawnedObjectParent = m_OverrideParentGameObject != null ? m_OverrideParentGameObject : this.transform;
 
-            GameObject obj = Instantiate(originalInstance, spawnedObjectParent);
+            GameObject obj = Instantiate(m_OriginalInstance, spawnedObjectParent);
             obj.transform.position = position;
             obj.transform.rotation = rotation;
             obj.SetActive(true);
 
-            _pool.Add(obj);
+            m_Pool.Add(obj);
 
             return true;
         }
@@ -64,7 +64,7 @@ public class ObjectPool : MonoBehaviour
 
     public void DespawnAll()
     {
-        foreach(GameObject item in _pool)
+        foreach(GameObject item in m_Pool)
         {
             if(item.activeInHierarchy)
                 item.SetActive(false);
@@ -73,6 +73,6 @@ public class ObjectPool : MonoBehaviour
 
     public void Deallocate()
     {
-        _pool.Clear();
+        m_Pool.Clear();
     }
 }

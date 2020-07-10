@@ -3,19 +3,19 @@ using UnityEngine;
 
 public class UIEvents : MonoBehaviour
 {
-    private static UIEvents instance;
+    private static UIEvents sm_Instance;
     // Level events
     public event Action<int, int> UpdateHealth;
     public event Action<int, int> UpdateBombs;
 
     private void Awake()
     {
-        instance = this;
+        sm_Instance = this;
     }
 
     public static UIEvents Instance()
     {
-        return instance;
+        return sm_Instance;
     }
 
     public void InvokeUpdateHealth(int ID, int health)

@@ -6,21 +6,17 @@ using UnityEngine.Tilemaps;
 
 public class ExplosionHandler : MonoBehaviour
 {
-    public Tilemap _tileMap;
-    public Tilemap _gameArea;
+    public Tilemap m_TileMap;
+    public Tilemap m_GameArea;
 
     public GameObject m_OrthogonalBomb;
     public GameObject m_DiagonalBomb;
     public GameObject m_Explosion;
 
-    public TileBase _destructableTile;
-    public TileBase _wallTile;
+    public TileBase m_DestructableTile;
+    public TileBase m_WallTile;
 
-    public LayerMask _ObjectLayers;
-
-    private void Awake()
-    {
-    }
+    public LayerMask m_ObjectLayers;
 
     private void OnEnable()
     {
@@ -42,13 +38,13 @@ public class ExplosionHandler : MonoBehaviour
 
     private bool IsInsideGameArea(Vector3Int point)
     {
-        return _gameArea.GetTile<TileBase>(point) != null;
+        return m_GameArea.GetTile<TileBase>(point) != null;
     }
 
 
     public void TrySpawnOrthogonalBomb(Vector3 pos, Character player = null)
     {
-        Vector3Int cell = _tileMap.WorldToCell(pos);
+        Vector3Int cell = m_TileMap.WorldToCell(pos);
 
         if(!IsInsideGameArea(cell) || !IsTileEmpty(cell))
         {
@@ -56,7 +52,7 @@ public class ExplosionHandler : MonoBehaviour
             return;
         } 
 
-        Vector3 cellCenterPosition = _tileMap.GetCellCenterWorld(cell);
+        Vector3 cellCenterPosition = m_TileMap.GetCellCenterWorld(cell);
 
         bool result = ObjectPoolManager.Instance().Spawn(m_OrthogonalBomb.GetInstanceID(), cellCenterPosition, Quaternion.identity);
         player?.CallbackDropOrthogonalBomb(result);
@@ -64,8 +60,8 @@ public class ExplosionHandler : MonoBehaviour
 
     public void SpawnDiagonalBomb(Vector3 pos)
     {
-        Vector3Int cell = _tileMap.WorldToCell(pos);
-        Vector3 cellCenterPosition = _tileMap.GetCellCenterWorld(cell);
+        Vector3Int cell = m_TileMap.WorldToCell(pos);
+        Vector3 cellCenterPosition = m_TileMap.GetCellCenterWorld(cell);
 
         bool result = ObjectPoolManager.Instance().Spawn(m_DiagonalBomb.GetInstanceID(), cellCenterPosition, Quaternion.identity);
     }
@@ -73,7 +69,7 @@ public class ExplosionHandler : MonoBehaviour
 
     public void SpawnExplosionOrthogonal(Vector3 pos)
     {
-        Vector3Int cellPos = _tileMap.WorldToCell(pos);
+        Vector3Int cellPos = m_TileMap.WorldToCell(pos);
 
         ExplodeCell(cellPos, Vector3Int.zero);
 
@@ -85,7 +81,7 @@ public class ExplosionHandler : MonoBehaviour
 
     public void SpawnExplosionDiagonal(Vector3 pos)
     {
-        Vector3Int cellPos = _tileMap.WorldToCell(pos);
+        Vector3Int cellPos = m_TileMap.WorldToCell(pos);
 
         ExplodeCell(cellPos, Vector3Int.zero);
 
@@ -112,16 +108,16 @@ public class ExplosionHandler : MonoBehaviour
 
     private void ExplodeCell(Vector3Int pos, Vector3Int dir)
     {
-        TileBase tile = _tileMap.GetTile<TileBase>(pos);
-        Vector3 cellCenterPosition = _tileMap.GetCellCenterWorld(pos);
+        TileBase tile = m_TileMap.GetTile<TileBase>(pos);
+        Vector3 cellCenterPosition = m_TileMap.GetCellCenterWorld(pos);
 
-        if(tile == _wallTile)
+        if(tile == m_WallTile)
             return;
 
-        if(tile == _destructableTile)
+        if(tile == m_DestructableTile)
         {
             StartCoroutine(SpawnExplosionDelay(pos, dir));
-            _tileMap.SetTile(pos, null);
+            m_TileMap.SetTile(pos, null);
             return;
         }
 
@@ -130,7 +126,7 @@ public class ExplosionHandler : MonoBehaviour
 
     private IEnumerator SpawnExplosionDelay(Vector3Int position, Vector3Int direction)
     {  
-        Vector3 cellCenterPosition = _tileMap.GetCellCenterWorld(position);
+        Vector3 cellCenterPosition = m_TileMap.GetCellCenterWorld(position);
         ObjectPoolManager.Instance().Spawn(m_Explosion.GetInstanceID(), cellCenterPosition, Quaternion.identity);
         yield return new WaitForSeconds(0.01f);
 
@@ -141,13 +137,13 @@ public class ExplosionHandler : MonoBehaviour
 
     private bool IsTileEmpty(Vector3Int cell)
     {
-        TileBase tile = _tileMap.GetTile<TileBase>(cell);
+        TileBase tile = m_TileMap.GetTile<TileBase>(cell);
 
-        if(tile == _destructableTile || tile == _wallTile)
+        if(tile == m_DestructableTile || tile == m_WallTile)
             return false;
 
-        var tileBounds = _tileMap.GetBoundsLocal(cell);
-        Vector3 position = _tileMap.GetCellCenterWorld(cell);
-        return !Physics2D.OverlapBox(position, 0.5f * tileBounds.size, 0.0f, _ObjectLayers);
+        var tileBounds = m_TileMap.GetBoundsLocal(cell);
+        Vector3 position = m_TileMap.GetCellCenterWorld(cell);
+        return !Physics2D.OverlapBox(position, 0.5f * tileBounds.size, 0.0f, m_ObjectLayers);
     }
 }
