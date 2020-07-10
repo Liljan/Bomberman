@@ -65,7 +65,7 @@ class InputMappingCSGenerator
         fields += name;
         fields += "= { ";
 
-        for (int i = 1; i <= amount-1; i++)
+        for(int i = 1; i <= amount-1; i++)
         {
             fields += "\"" + name + "_" + i + "\", ";
         }
@@ -115,9 +115,9 @@ public class JoystickInputGenerator : EditorWindow
 
         _numerOfContollers = EditorGUILayout.IntField("Amount of players", _numerOfContollers);
 
-        if (GUILayout.Button("Generate Input file"))
+        if(GUILayout.Button("Generate Input file"))
         {
-           /* if (File.Exists(_fileName))
+           /* if(File.Exists(_fileName))
             {
                 Debug.Log("Error: File already exists.");
                 return;
@@ -133,7 +133,7 @@ public class JoystickInputGenerator : EditorWindow
             sr.WriteLine("  serializedVersion: 2");
             sr.WriteLine("  m_Axes:");
 
-            for (int i = 0; i < _numerOfContollers; i++)
+            for(int i = 0; i < _numerOfContollers; i++)
             {
                 InputAction Jump = new InputAction(i + 1, "Jump", "", "1", 0);
                 sr.Write(Jump.ToString());

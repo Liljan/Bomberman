@@ -29,7 +29,7 @@ using UnityEngine;
 
 //        for(int i = 0; i < m_Capacity; i++)
 //        {
-//            GameObject newGameObject = (GameObject)Instantiate(m_OriginalInstance, this.transform);
+//            GameObject newGameObject =(GameObject)Instantiate(m_OriginalInstance, this.transform);
 //            newGameObject.SetActive(false);
 
 //            m_Pool.Add(newGameObject);
@@ -44,7 +44,7 @@ public class ObjectPoolManager : MonoBehaviour
 
     public List<ObjectPool> m_ObjectPools;
 
-    private Dictionary<int, ObjectPool> m_Pools = new Dictionary<int, ObjectPool>();
+    private Dictionary<int, ObjectPool> m_PoolMap = new Dictionary<int, ObjectPool>();
 
     private void Awake()
     {
@@ -60,13 +60,50 @@ public class ObjectPoolManager : MonoBehaviour
 
     private void Init()
     {
-        foreach (ObjectPool pool in m_ObjectPools)
-            m_Pools.Add(pool.originalInstance.GetInstanceID(), pool);
+        foreach(ObjectPool pool in m_ObjectPools)
+            m_PoolMap.Add(pool.originalInstance.GetInstanceID(), pool);
     }
 
-    public void ClearAll()
+    public bool Spawn(int prefabID, Vector3 position, Quaternion rotation)
     {
-        m_Pools.Clear();
+        if(!m_PoolMap.ContainsKey(prefabID))
+        {
+            Debug.LogError("Trying to spawn object that has no object pool");
+            return false;
+        }
+
+        return m_PoolMap[prefabID].SpawnObject(position, rotation);
+    }
+
+    public bool DespawnPool(int prefabID)
+    {
+        if(!m_PoolMap.ContainsKey(prefabID))
+        {
+            Debug.LogError("Trying to object type which has no object pool.");
+            return false;
+        }
+
+        m_PoolMap[prefabID].DespawnAll();
+        return true;
+    }
+
+    public void DeallocateAllPools()
+    {
+        foreach(int id in m_PoolMap.Keys)
+            DeallocatePool(id);
+
         Debug.Log("All object pools have been cleared.");
+    }
+
+    public bool DeallocatePool(int prefabID)
+    {
+        if(!m_PoolMap.ContainsKey(prefabID))
+        {
+            Debug.LogError("Trying to clear object pool that does not exist.");
+            return false;
+        }
+
+        m_PoolMap[prefabID].Deallocate();
+        return true;
     }
 }

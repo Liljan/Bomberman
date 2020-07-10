@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class ObjectPool : MonoBehaviour
 {
     public GameObject originalInstance;
-    public int size;
+    public int startSize;
     public bool isExpandable;
 
     public Transform overrideParentGameobject = null;
@@ -16,13 +16,13 @@ public class ObjectPool : MonoBehaviour
     {
         Debug.Assert(originalInstance);
 
-        _pool = new List<GameObject>(size);
+        _pool = new List<GameObject>(startSize);
 
         Transform spawnedObjectParent = overrideParentGameobject != null ? overrideParentGameobject : this.transform;
 
-        for (int i = 0; i < size; i++)
+        for(int i = 0; i < startSize; i++)
         {
-            GameObject newGameObject = (GameObject)Instantiate(originalInstance, this.transform);
+            GameObject newGameObject =(GameObject)Instantiate(originalInstance, this.transform);
             newGameObject.SetActive(false);
            
             _pool.Add(newGameObject);
@@ -58,7 +58,21 @@ public class ObjectPool : MonoBehaviour
             return true;
         }
 
-        Debug.Log("Object Pool maxed out: " + this.gameObject.name);
+        Debug.LogWarning("Object Pool maxed out: " + this.gameObject.name);
         return false;
+    }
+
+    public void DespawnAll()
+    {
+        foreach(GameObject item in _pool)
+        {
+            if(item.activeInHierarchy)
+                item.SetActive(false);
+        }
+    }
+
+    public void Deallocate()
+    {
+        _pool.Clear();
     }
 }

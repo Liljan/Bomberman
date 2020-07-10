@@ -15,7 +15,7 @@ public class DiagonalBomb : MonoBehaviour {
     private 
 
     // Update is called once per frame
-    void Update () {
+    void Update() {
         countdownTimer -= Time.deltaTime;
 
         if(countdownTimer <= 0.0f)
@@ -30,7 +30,7 @@ public class DiagonalBomb : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Explosion")
+        if(collision.gameObject.tag == "Explosion")
             Explode();
     }
 }

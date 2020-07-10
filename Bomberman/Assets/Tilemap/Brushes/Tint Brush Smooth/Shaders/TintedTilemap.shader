@@ -2,7 +2,7 @@
  {
 		Properties
 		{
-			[PerRendererData]_MainTex ("Albedo (RGB)", 2D) = "white" {}
+			[PerRendererData]_MainTex("Albedo(RGB)", 2D) = "white" {}
 		}
   
 		SubShader 
@@ -40,7 +40,7 @@
 				v2f vert(appdata v) {
 					v2f o;
   
-					o.worldPos = mul (unity_ObjectToWorld, v.vertex);
+					o.worldPos = mul(unity_ObjectToWorld, v.vertex);
 					o.vertex = UnityObjectToClipPos(v.vertex);
 					o.uv = float4(v.texcoord.xy, 0, 0);
   
@@ -48,8 +48,8 @@
 				}
   
 				fixed4 frag(v2f i) : SV_Target {
-					fixed4 col = tex2D (_MainTex, i.uv);
-					fixed4 tint = tex2D(_TintMap, (i.worldPos.xy / _TintMapSize)  + .5);
+					fixed4 col = tex2D(_MainTex, i.uv);
+					fixed4 tint = tex2D(_TintMap,(i.worldPos.xy / _TintMapSize)  + .5);
 					return tint * col;
 			}
 			ENDCG

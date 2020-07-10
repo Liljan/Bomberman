@@ -16,7 +16,7 @@ public class TintTextureGenerator : MonoBehaviour
 	{
 		get
 		{
-			if (m_TintTexture == null)
+			if(m_TintTexture == null)
 			{
 				m_TintTexture = new Texture2D(k_TintMapSize, k_TintMapSize, TextureFormat.ARGB32, false);
 				m_TintTexture.hideFlags = HideFlags.HideAndDontSave;
@@ -30,14 +30,14 @@ public class TintTextureGenerator : MonoBehaviour
 
 	public void Refresh(Grid grid)
 	{
-		if (grid == null)
+		if(grid == null)
 			return;
 
 		int w = tintTexture.width;
 		int h = tintTexture.height;
-		for (int y = 0; y < h; y++)
+		for(int y = 0; y < h; y++)
 		{
-			for (int x = 0; x < w; x++)
+			for(int x = 0; x < w; x++)
 			{
 				Vector3Int world = TextureToWorld(new Vector3Int(x, y, 0));
 				tintTexture.SetPixel(x, y, GetGridInformation(grid).GetPositionProperty(world, "Tint", Color.white));
@@ -48,7 +48,7 @@ public class TintTextureGenerator : MonoBehaviour
 
 	public void Refresh(Grid grid, Vector3Int position)
 	{
-		if (grid == null)
+		if(grid == null)
 			return;
 
 		RefreshGlobalShaderValues();
@@ -59,7 +59,7 @@ public class TintTextureGenerator : MonoBehaviour
 
 	public Color GetColor(Grid grid, Vector3Int position)
 	{
-		if (grid == null)
+		if(grid == null)
 			return Color.white;
 
 		return GetGridInformation(grid).GetPositionProperty(position, "Tint", Color.white);
@@ -67,7 +67,7 @@ public class TintTextureGenerator : MonoBehaviour
 
 	public void SetColor(Grid grid, Vector3Int position, Color color)
 	{
-		if (grid == null)
+		if(grid == null)
 			return;
 
 		GetGridInformation(grid).SetPositionProperty(position, "Tint", color);
@@ -88,7 +88,7 @@ public class TintTextureGenerator : MonoBehaviour
 	{
 		GridInformation gridInformation = grid.GetComponent<GridInformation>();
 
-		if (gridInformation == null)
+		if(gridInformation == null)
 			gridInformation = grid.gameObject.AddComponent<GridInformation>();
 
 		return gridInformation;

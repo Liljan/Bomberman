@@ -9,14 +9,14 @@ public class InGameHUD : MonoBehaviour {
     public Text BombText;
 
 	// Use this for initialization
-	void Start () {
+	void Start() {
         UIEvents.Instance().UpdateHealth += SetHealthText;
         UIEvents.Instance().UpdateBombs += SetBombText;
     }
 
     void SetHealthText(int ID, int health)
     {
-        if (this.ID != ID)
+        if(this.ID != ID)
             return;
 
         HealthText.text = "Health: " + health;
@@ -24,7 +24,7 @@ public class InGameHUD : MonoBehaviour {
 
     void SetBombText(int ID, int bombs)
     {
-        if (this.ID != ID)
+        if(this.ID != ID)
             return;
 
         BombText.text = "Bombs: " + bombs;

@@ -18,11 +18,11 @@ namespace UnityEngine.Tilemaps
 
 		public override void RefreshTile(Vector3Int location, ITilemap tileMap)
 		{
-			for (int yd = -1; yd <= 1; yd++)
-				for (int xd = -1; xd <= 1; xd++)
+			for(int yd = -1; yd <= 1; yd++)
+				for(int xd = -1; xd <= 1; xd++)
 				{
 					Vector3Int position = new Vector3Int(location.x + xd, location.y + yd, location.z);
-					if (TileValue(tileMap, position))
+					if(TileValue(tileMap, position))
 						tileMap.RefreshTile(position);
 				}
 		}
@@ -43,7 +43,7 @@ namespace UnityEngine.Tilemaps
 			mask += TileValue(tileMap, location + new Vector3Int(-1, 0, 0)) ? 8 : 0;
 
 			int index = GetIndex((byte)mask);
-			if (index >= 0 && index < m_Sprites.Length && TileValue(tileMap, location))
+			if(index >= 0 && index < m_Sprites.Length && TileValue(tileMap, location))
 			{
 				tileData.sprite = m_Sprites[index];
 				tileData.transform = GetTransform((byte)mask);
@@ -55,12 +55,12 @@ namespace UnityEngine.Tilemaps
 		private bool TileValue(ITilemap tileMap, Vector3Int position)
 		{
 			TileBase tile = tileMap.GetTile(position);
-			return (tile != null && tile == this);
+			return(tile != null && tile == this);
 		}
 
 		private int GetIndex(byte mask)
 		{
-			switch (mask)
+			switch(mask)
 			{
 				case 0: return 0;
 				case 3:
@@ -84,7 +84,7 @@ namespace UnityEngine.Tilemaps
 
 		private Matrix4x4 GetTransform(byte mask)
 		{
-			switch (mask)
+			switch(mask)
 			{
 				case 9:
 				case 10:
@@ -108,7 +108,7 @@ namespace UnityEngine.Tilemaps
 		{
 			string path = EditorUtility.SaveFilePanelInProject("Save Pipeline Tile", "New Pipeline Tile", "asset", "Save Pipeline Tile", "Assets");
 
-			if (path == "")
+			if(path == "")
 				return;
 
 			AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<PipelineTile>(), path);
@@ -120,11 +120,11 @@ namespace UnityEngine.Tilemaps
 	[CustomEditor(typeof(PipelineTile))]
 	public class PipelineTileEditor : Editor
 	{
-		private PipelineTile tile { get { return (target as PipelineTile); } }
+		private PipelineTile tile { get { return(target as PipelineTile); } }
 
 		public void OnEnable()
 		{
-			if (tile.m_Sprites == null || tile.m_Sprites.Length != 5)
+			if(tile.m_Sprites == null || tile.m_Sprites.Length != 5)
 				tile.m_Sprites = new Sprite[5];
 		}
 
@@ -134,12 +134,12 @@ namespace UnityEngine.Tilemaps
 			EditorGUILayout.Space();
 			
 			EditorGUI.BeginChangeCheck();
-			tile.m_Sprites[0] = (Sprite) EditorGUILayout.ObjectField("None", tile.m_Sprites[0], typeof(Sprite), false, null);
-			tile.m_Sprites[2] = (Sprite) EditorGUILayout.ObjectField("One", tile.m_Sprites[2], typeof(Sprite), false, null);
-			tile.m_Sprites[1] = (Sprite) EditorGUILayout.ObjectField("Two", tile.m_Sprites[1], typeof(Sprite), false, null);
-			tile.m_Sprites[3] = (Sprite) EditorGUILayout.ObjectField("Three", tile.m_Sprites[3], typeof(Sprite), false, null);
-			tile.m_Sprites[4] = (Sprite) EditorGUILayout.ObjectField("Four", tile.m_Sprites[4], typeof(Sprite), false, null);
-			if (EditorGUI.EndChangeCheck())
+			tile.m_Sprites[0] =(Sprite) EditorGUILayout.ObjectField("None", tile.m_Sprites[0], typeof(Sprite), false, null);
+			tile.m_Sprites[2] =(Sprite) EditorGUILayout.ObjectField("One", tile.m_Sprites[2], typeof(Sprite), false, null);
+			tile.m_Sprites[1] =(Sprite) EditorGUILayout.ObjectField("Two", tile.m_Sprites[1], typeof(Sprite), false, null);
+			tile.m_Sprites[3] =(Sprite) EditorGUILayout.ObjectField("Three", tile.m_Sprites[3], typeof(Sprite), false, null);
+			tile.m_Sprites[4] =(Sprite) EditorGUILayout.ObjectField("Four", tile.m_Sprites[4], typeof(Sprite), false, null);
+			if(EditorGUI.EndChangeCheck())
 				EditorUtility.SetDirty(tile);
 		}
 	}

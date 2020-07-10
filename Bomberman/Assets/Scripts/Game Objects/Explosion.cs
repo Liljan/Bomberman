@@ -23,7 +23,7 @@ public class Explosion : MonoBehaviour
     {
         countdownTimer -= Time.deltaTime;
 
-        if (countdownTimer <= 0.0f)
+        if(countdownTimer <= 0.0f)
         {
             this.gameObject.SetActive(false);
         }

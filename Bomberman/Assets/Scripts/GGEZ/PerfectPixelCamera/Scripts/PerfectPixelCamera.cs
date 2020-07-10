@@ -6,18 +6,18 @@ namespace GGEZ
 
 [
     ExecuteInEditMode,                                       // Run this script in edit mode so the preview window looks good
-    RequireComponent (typeof(Camera)),                       // Only add this component if there is a camera
-    HelpURL ("http://ggez.org/posts/perfect-pixel-camera/"), // Website opened by clicking the book icon on the component
+    RequireComponent(typeof(Camera)),                       // Only add this component if there is a camera
+    HelpURL("http://ggez.org/posts/perfect-pixel-camera/"), // Website opened by clicking the book icon on the component
     DisallowMultipleComponent,                               // Only one of these per GameObject
-    AddComponentMenu ("GGEZ/Camera/Perfect Pixel Camera")    // Insert into the "Add Component..." menu
+    AddComponentMenu("GGEZ/Camera/Perfect Pixel Camera")    // Insert into the "Add Component..." menu
 ]
 public class PerfectPixelCamera : MonoBehaviour
 {
 
 // Set this value to the same value as Pixels Per Unit when importing sprites
 [
-    Tooltip ("The number of texture pixels that fit in 1.0 world units. Common values are 8, 16, 32 and 64. If you're making a tile-based game, this is your tile size."),
-    Range (1, 64)
+    Tooltip("The number of texture pixels that fit in 1.0 world units. Common values are 8, 16, 32 and 64. If you're making a tile-based game, this is your tile size."),
+    Range(1, 64)
 ]
 public int TexturePixelsPerWorldUnit = 16;
 
@@ -45,11 +45,11 @@ public float SnapSizeWorldUnits { get; private set; }
 //---------------------------------------------------------------------------
 // OnEnable - Called by Unity when the component is created or enabled
 //---------------------------------------------------------------------------
-void OnEnable ()
+void OnEnable()
     {
 
     // Grab a reference to the camera
-    this.cameraComponent = (Camera)this.GetComponent (typeof(Camera));
+    this.cameraComponent =(Camera)this.GetComponent(typeof(Camera));
 
 #if !UNITY_5_5_OR_NEWER
 
@@ -70,7 +70,7 @@ void OnEnable ()
 #endif
 
     // Run the LateUpdate immediately so that the projection gets set up
-    this.LateUpdate ();
+    this.LateUpdate();
 
     }
 
@@ -79,14 +79,14 @@ void OnEnable ()
 // This function cleans up after the PerfectPixelCamera so that the
 // projection matrix isn't left in an altered state by this component.
 //---------------------------------------------------------------------------
-void OnDisable ()
+void OnDisable()
     {
 
-    if (this.cameraComponent == null)
+    if(this.cameraComponent == null)
         {
         return;
         }
-    this.cameraComponent.ResetProjectionMatrix ();
+    this.cameraComponent.ResetProjectionMatrix();
     this.cameraComponent = null;
 
     }
@@ -96,7 +96,7 @@ void OnDisable ()
 // If you have other scripts that use LateUpdate, you might want to use
 // the Script Execution Order project setting to make this script run last.
 //---------------------------------------------------------------------------
-void LateUpdate ()
+void LateUpdate()
     {
 
     // Get a local reference
@@ -106,25 +106,25 @@ void LateUpdate ()
     camera.transparencySortMode = TransparencySortMode.Orthographic;
     camera.orthographic = true;
     camera.transform.rotation = Quaternion.identity;
-    camera.orthographicSize = Mathf.Max (camera.orthographicSize, 0.00001f);
+    camera.orthographicSize = Mathf.Max(camera.orthographicSize, 0.00001f);
 
     // This is the code that computes the parameters needed to perfectly map
     // world-space pixels to screen-space pixels.
     var pixelRect = camera.pixelRect;
     float texturePixelsPerWorldUnit = this.TexturePixelsPerWorldUnit;
-    float zoomFactor = Mathf.Max (1f, Mathf.Ceil ((1f * pixelRect.height) / (camera.orthographicSize * 2f * texturePixelsPerWorldUnit)));
-    float halfWidth  = (1f * pixelRect.width)  / (zoomFactor * 2f * texturePixelsPerWorldUnit);
-    float halfHeight = (1f * pixelRect.height) / (zoomFactor * 2f * texturePixelsPerWorldUnit);
-    float snapSizeWorldUnits = 1f / (zoomFactor * texturePixelsPerWorldUnit);
+    float zoomFactor = Mathf.Max(1f, Mathf.Ceil((1f * pixelRect.height) /(camera.orthographicSize * 2f * texturePixelsPerWorldUnit)));
+    float halfWidth  =(1f * pixelRect.width)  /(zoomFactor * 2f * texturePixelsPerWorldUnit);
+    float halfHeight =(1f * pixelRect.height) /(zoomFactor * 2f * texturePixelsPerWorldUnit);
+    float snapSizeWorldUnits = 1f /(zoomFactor * texturePixelsPerWorldUnit);
     float halfPixelOffsetInWorldUnits = halfPixelOffsetIfNeededForD3D * snapSizeWorldUnits;
-    float pixelPerfectXOffset = halfPixelOffsetInWorldUnits - Mathf.Repeat (snapSizeWorldUnits + Mathf.Repeat (camera.transform.position.x, snapSizeWorldUnits), snapSizeWorldUnits);
-    float pixelPerfectYOffset = halfPixelOffsetInWorldUnits - Mathf.Repeat (snapSizeWorldUnits + Mathf.Repeat (camera.transform.position.y, snapSizeWorldUnits), snapSizeWorldUnits);
+    float pixelPerfectXOffset = halfPixelOffsetInWorldUnits - Mathf.Repeat(snapSizeWorldUnits + Mathf.Repeat(camera.transform.position.x, snapSizeWorldUnits), snapSizeWorldUnits);
+    float pixelPerfectYOffset = halfPixelOffsetInWorldUnits - Mathf.Repeat(snapSizeWorldUnits + Mathf.Repeat(camera.transform.position.y, snapSizeWorldUnits), snapSizeWorldUnits);
 
     // Save the snap size so other scripts can use it
     this.SnapSizeWorldUnits = snapSizeWorldUnits;
 
     // Build a manual projection matrix that fixes the camera!
-    camera.projectionMatrix = Matrix4x4.Ortho (
+    camera.projectionMatrix = Matrix4x4.Ortho(
             -halfWidth + pixelPerfectXOffset,
              halfWidth + pixelPerfectXOffset,
             -halfHeight + pixelPerfectYOffset,

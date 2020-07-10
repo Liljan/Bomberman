@@ -90,7 +90,7 @@ namespace UnityEngine.Tilemaps
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
             Grid grid = GetComponentInParent<Grid>();
-            if (grid == null)
+            if(grid == null)
                 return;
 
             m_PositionIntKeys.Clear();
@@ -106,9 +106,9 @@ namespace UnityEngine.Tilemaps
             m_PositionColorKeys.Clear();
             m_PositionColorValues.Clear();
 
-            foreach (var kvp in m_PositionProperties)
+            foreach(var kvp in m_PositionProperties)
             {
-                switch (kvp.Value.type)
+                switch(kvp.Value.type)
                 {
                     case GridInformationType.Integer:
                         m_PositionIntKeys.Add(kvp.Key);
@@ -141,42 +141,42 @@ namespace UnityEngine.Tilemaps
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
             m_PositionProperties.Clear();
-            for (int i = 0; i != Math.Min(m_PositionIntKeys.Count, m_PositionIntValues.Count); i++)
+            for(int i = 0; i != Math.Min(m_PositionIntKeys.Count, m_PositionIntValues.Count); i++)
             {
                 GridInformationValue positionValue;
                 positionValue.type = GridInformationType.Integer;
                 positionValue.data = m_PositionIntValues[i];
                 m_PositionProperties.Add(m_PositionIntKeys[i], positionValue);
             }
-            for (int i = 0; i != Math.Min(m_PositionStringKeys.Count, m_PositionStringValues.Count); i++)
+            for(int i = 0; i != Math.Min(m_PositionStringKeys.Count, m_PositionStringValues.Count); i++)
             {
                 GridInformationValue positionValue;
                 positionValue.type = GridInformationType.String;
                 positionValue.data = m_PositionStringValues[i];
                 m_PositionProperties.Add(m_PositionStringKeys[i], positionValue);
             }
-            for (int i = 0; i != Math.Min(m_PositionFloatKeys.Count, m_PositionFloatValues.Count); i++)
+            for(int i = 0; i != Math.Min(m_PositionFloatKeys.Count, m_PositionFloatValues.Count); i++)
             {
                 GridInformationValue positionValue;
                 positionValue.type = GridInformationType.Float;
                 positionValue.data = m_PositionFloatValues[i];
                 m_PositionProperties.Add(m_PositionFloatKeys[i], positionValue);
             }
-            for (int i = 0; i != Math.Min(m_PositionDoubleKeys.Count, m_PositionDoubleValues.Count); i++)
+            for(int i = 0; i != Math.Min(m_PositionDoubleKeys.Count, m_PositionDoubleValues.Count); i++)
             {
                 GridInformationValue positionValue;
                 positionValue.type = GridInformationType.Double;
                 positionValue.data = m_PositionDoubleValues[i];
                 m_PositionProperties.Add(m_PositionDoubleKeys[i], positionValue);
             }
-            for (int i = 0; i != Math.Min(m_PositionObjectKeys.Count, m_PositionObjectValues.Count); i++)
+            for(int i = 0; i != Math.Min(m_PositionObjectKeys.Count, m_PositionObjectValues.Count); i++)
             {
                 GridInformationValue positionValue;
                 positionValue.type = GridInformationType.UnityObject;
                 positionValue.data = m_PositionObjectValues[i];
                 m_PositionProperties.Add(m_PositionObjectKeys[i], positionValue);
             }
-            for (int i = 0; i != Math.Min(m_PositionColorKeys.Count, m_PositionColorValues.Count); i++)
+            for(int i = 0; i != Math.Min(m_PositionColorKeys.Count, m_PositionColorValues.Count); i++)
             {
                 GridInformationValue positionValue;
                 positionValue.type = GridInformationType.Color;
@@ -223,7 +223,7 @@ namespace UnityEngine.Tilemaps
         private bool SetPositionProperty(Vector3Int position, String name, GridInformationType dataType, System.Object positionProperty)
         {
             Grid grid = GetComponentInParent<Grid>();
-            if (grid != null && positionProperty != null)
+            if(grid != null && positionProperty != null)
             {
                 GridInformationKey positionKey;
                 positionKey.position = position;
@@ -246,9 +246,9 @@ namespace UnityEngine.Tilemaps
             positionKey.name = name;
 
             GridInformationValue positionValue;
-            if (m_PositionProperties.TryGetValue(positionKey, out positionValue))
+            if(m_PositionProperties.TryGetValue(positionKey, out positionValue))
             {
-                if (positionValue.type != GridInformationType.UnityObject)
+                if(positionValue.type != GridInformationType.UnityObject)
                     throw new InvalidCastException("Value stored in GridInformation is not of the right type");
                 return positionValue.data as T;
             }
@@ -262,11 +262,11 @@ namespace UnityEngine.Tilemaps
             positionKey.name = name;
 
             GridInformationValue positionValue;
-            if (m_PositionProperties.TryGetValue(positionKey, out positionValue))
+            if(m_PositionProperties.TryGetValue(positionKey, out positionValue))
             {
-                if (positionValue.type != GridInformationType.Integer)
+                if(positionValue.type != GridInformationType.Integer)
                     throw new InvalidCastException("Value stored in GridInformation is not of the right type");
-                return (int)positionValue.data;
+                return(int)positionValue.data;
             }
             return defaultValue;
         }
@@ -278,11 +278,11 @@ namespace UnityEngine.Tilemaps
             positionKey.name = name;
 
             GridInformationValue positionValue;
-            if (m_PositionProperties.TryGetValue(positionKey, out positionValue))
+            if(m_PositionProperties.TryGetValue(positionKey, out positionValue))
             {
-                if (positionValue.type != GridInformationType.String)
+                if(positionValue.type != GridInformationType.String)
                     throw new InvalidCastException("Value stored in GridInformation is not of the right type");
-                return (string)positionValue.data;
+                return(string)positionValue.data;
             }
             return defaultValue;
         }
@@ -294,11 +294,11 @@ namespace UnityEngine.Tilemaps
             positionKey.name = name;
 
             GridInformationValue positionValue;
-            if (m_PositionProperties.TryGetValue(positionKey, out positionValue))
+            if(m_PositionProperties.TryGetValue(positionKey, out positionValue))
             {
-                if (positionValue.type != GridInformationType.Float)
+                if(positionValue.type != GridInformationType.Float)
                     throw new InvalidCastException("Value stored in GridInformation is not of the right type");
-                return (float)positionValue.data;
+                return(float)positionValue.data;
             }
             return defaultValue;
         }
@@ -310,11 +310,11 @@ namespace UnityEngine.Tilemaps
             positionKey.name = name;
 
             GridInformationValue positionValue;
-            if (m_PositionProperties.TryGetValue(positionKey, out positionValue))
+            if(m_PositionProperties.TryGetValue(positionKey, out positionValue))
             {
-                if (positionValue.type != GridInformationType.Double)
+                if(positionValue.type != GridInformationType.Double)
                     throw new InvalidCastException("Value stored in GridInformation is not of the right type");
-                return (double)positionValue.data;
+                return(double)positionValue.data;
             }
             return defaultValue;
         }
@@ -326,11 +326,11 @@ namespace UnityEngine.Tilemaps
             positionKey.name = name;
 
             GridInformationValue positionValue;
-            if (m_PositionProperties.TryGetValue(positionKey, out positionValue))
+            if(m_PositionProperties.TryGetValue(positionKey, out positionValue))
             {
-                if (positionValue.type != GridInformationType.Color)
+                if(positionValue.type != GridInformationType.Color)
                     throw new InvalidCastException("Value stored in GridInformation is not of the right type");
-                return (Color)positionValue.data;
+                return(Color)positionValue.data;
             }
             return defaultValue;
         }

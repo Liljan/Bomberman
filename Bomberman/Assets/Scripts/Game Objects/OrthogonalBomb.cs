@@ -13,7 +13,7 @@ public class OrthogonalBomb : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
         countdownTimer -= Time.deltaTime;
 
@@ -29,7 +29,7 @@ public class OrthogonalBomb : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Explosion")
+        if(collision.gameObject.tag == "Explosion")
             Explode();
     }
 }

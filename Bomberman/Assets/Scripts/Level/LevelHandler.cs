@@ -15,7 +15,7 @@ public class LevelHandler : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        for (int i = 0; i < amountOfPlayers; i++)
+        for(int i = 0; i < amountOfPlayers; i++)
         {
             GameObject spawnedPlayer = Instantiate(playerObject, spawnPoints[i].position, Quaternion.identity);
             Character character = spawnedPlayer.GetComponent<Character>();

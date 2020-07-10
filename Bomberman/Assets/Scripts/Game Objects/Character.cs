@@ -79,7 +79,7 @@ public class Character : MonoBehaviour
         //MoveStickSensitivity();
         MoveWithSticks();
 
-        if (Input.GetButtonDown(ActionButton) && _bombs > 0)
+        if(Input.GetButtonDown(ActionButton) && _bombs > 0)
         {
             TryDropOrthogonalBomb();
         }
