@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class LevelEvents : MonoBehaviour {
 
-    private static LevelEvents instance;
+    private static LevelEvents sm_Instance;
 
     // Level events
     public event Action<Vector3, Character> TrySpawnOrthogonalBomb;
@@ -13,12 +13,12 @@ public class LevelEvents : MonoBehaviour {
 
     private void Awake()
     {
-        instance = this;
+        sm_Instance = this;
     }
 
     public static LevelEvents Instance()
     {
-        return instance;
+        return sm_Instance;
     }
 
     public void InvokeTrySpawnOrthogonalBomb(Vector3 pos, Character caller = null)

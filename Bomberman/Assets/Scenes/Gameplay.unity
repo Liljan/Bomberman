@@ -3971,6 +3971,7 @@ GameObject:
   - component: {fileID: 659310165}
   - component: {fileID: 659310164}
   - component: {fileID: 659310166}
+  - component: {fileID: 659310167}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -4016,6 +4017,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6200cf7239ffd240bcac908f5977dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &659310167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659310163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3459fb91e7f294c8bd5d62300b33dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ObjectPools: []
 --- !u!1 &661029083
 GameObject:
   m_ObjectHideFlags: 0
@@ -16099,6 +16113,7 @@ GameObject:
   - component: {fileID: 1936908251}
   - component: {fileID: 1936908253}
   - component: {fileID: 1936908254}
+  - component: {fileID: 1936908255}
   m_Layer: 0
   m_Name: LevelHandler
   m_TagString: Untagged
@@ -16176,3 +16191,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1317160994}
+--- !u!114 &1936908255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936908250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3459fb91e7f294c8bd5d62300b33dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ObjectPools:
+  - {fileID: 1119632773}
+  - {fileID: 1396052829}
+  - {fileID: 1409011632}
