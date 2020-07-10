@@ -23,8 +23,8 @@ public class ExplosionHandler : MonoBehaviour
         LevelEvents.Instance().SpawnExplosionOrthogonal += SpawnExplosionOrthogonal;
         LevelEvents.Instance().SpawnExplosionDiagonal += SpawnExplosionDiagonal;
 
-        LevelEvents.Instance().TrySpawnOrthogonalBomb += TrySpawnOrthogonalBomb;
-        LevelEvents.Instance().SpawnDiagonalBomb += SpawnDiagonalBomb;
+        LevelEvents.Instance().SpawnOrthogonalBomb += TrySpawnOrthogonalBomb;
+        LevelEvents.Instance().SpawnDiagonalBomb += TrySpawnDiagonalBomb;
     }
 
     private void OnDisable()
@@ -32,8 +32,8 @@ public class ExplosionHandler : MonoBehaviour
         LevelEvents.Instance().SpawnExplosionOrthogonal -= SpawnExplosionOrthogonal;
         LevelEvents.Instance().SpawnExplosionDiagonal -= SpawnExplosionDiagonal;
 
-        LevelEvents.Instance().TrySpawnOrthogonalBomb -= TrySpawnOrthogonalBomb;
-        LevelEvents.Instance().SpawnDiagonalBomb -= SpawnDiagonalBomb;
+        LevelEvents.Instance().SpawnOrthogonalBomb -= TrySpawnOrthogonalBomb;
+        LevelEvents.Instance().SpawnDiagonalBomb -= TrySpawnDiagonalBomb;
     }
 
     private bool IsInsideGameArea(Vector3Int point)
@@ -58,12 +58,20 @@ public class ExplosionHandler : MonoBehaviour
         player?.CallbackDropOrthogonalBomb(result);
     }
 
-    public void SpawnDiagonalBomb(Vector3 pos)
+    public void TrySpawnDiagonalBomb(Vector3 pos, Character player = null)
     {
         Vector3Int cell = m_TileMap.WorldToCell(pos);
+
+        if (!IsInsideGameArea(cell) || !IsTileEmpty(cell))
+        {
+            player?.CallbackDropOrthogonalBomb(false);
+            return;
+        }
+
         Vector3 cellCenterPosition = m_TileMap.GetCellCenterWorld(cell);
 
         bool result = ObjectPoolManager.Instance().Spawn(m_DiagonalBomb.GetInstanceID(), cellCenterPosition, Quaternion.identity);
+        player?.CallbackDropDiagonalBomb(result);
     }
 
 
@@ -111,10 +119,10 @@ public class ExplosionHandler : MonoBehaviour
         TileBase tile = m_TileMap.GetTile<TileBase>(pos);
         Vector3 cellCenterPosition = m_TileMap.GetCellCenterWorld(pos);
 
-        if(tile == m_WallTile)
+        if(IsWall(tile))
             return;
 
-        if(tile == m_DestructableTile)
+        if(IsDestructable(tile))
         {
             StartCoroutine(SpawnExplosionDelay(pos, dir));
             m_TileMap.SetTile(pos, null);
@@ -134,12 +142,14 @@ public class ExplosionHandler : MonoBehaviour
             ExplodeCell(position + direction, direction);
     }
 
+    private bool IsWall(TileBase t) { return t == m_WallTile; }
+    private bool IsDestructable(TileBase t) { return t == m_DestructableTile; }
 
     private bool IsTileEmpty(Vector3Int cell)
     {
         TileBase tile = m_TileMap.GetTile<TileBase>(cell);
-
-        if(tile == m_DestructableTile || tile == m_WallTile)
+        
+        if(IsDestructable(tile) || IsWall(tile))
             return false;
 
         var tileBounds = m_TileMap.GetBoundsLocal(cell);

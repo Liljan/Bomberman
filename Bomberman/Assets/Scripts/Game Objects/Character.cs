@@ -5,6 +5,7 @@ public class Character : MonoBehaviour
     private string m_HorizontalAxis;
     private string m_VerticalAxis;
     private string m_ActionButton;
+    private string m_ActionButtonAlt;
 
     public int m_Id;
     public float m_Speed = 1.0f;
@@ -44,12 +45,23 @@ public class Character : MonoBehaviour
         float x = Input.GetAxis(m_HorizontalAxis);
         float y = Input.GetAxis(m_VerticalAxis);
 
-        m_Rb2d.velocity = new Vector3(x * m_Speed, y * m_Speed, 0.0f);
+        m_Rb2d.velocity = m_Speed * NormalizeVelocity(x, y);
 
-        m_Animator.SetBool("Left", x > 0.05f);
-        m_Animator.SetBool("Right", x < -0.05f);
-        m_Animator.SetBool("Up", y > 0.05f);
-        m_Animator.SetBool("Down", y < -0.05f);
+        m_Animator.SetBool("Left", x > 0.0f);
+        m_Animator.SetBool("Right", x < -0.0f);
+        m_Animator.SetBool("Up", y > 0.0f);
+        m_Animator.SetBool("Down", y < -0.0f);
+    }
+
+    private Vector3 NormalizeVelocity(float vx, float vy)
+    {
+        float magnitude = Mathf.Sqrt(vx * vx + vy * vy);
+        
+        // Replace with float compare
+        if(magnitude == 0.0f)
+            return Vector3.zero;
+
+        return new Vector3(vx / magnitude, vy / magnitude, 0.0f);
     }
 
 
@@ -75,22 +87,29 @@ public class Character : MonoBehaviour
         //MoveStickSensitivity();
         MoveWithSticks();
 
-        if(Input.GetButtonDown(m_ActionButton) && m_Bombs > 0)
-        {
-            TryDropOrthogonalBomb();
-        }
+        if (Input.GetButtonDown(m_ActionButton) && m_Bombs > 0)
+            DropOrthogonalBomb();
+        else if (Input.GetButtonDown(m_ActionButtonAlt))
+            DropDiagonalBomb();            
 
         RechargeBombs();
     }
 
 
-    public void SetID(int ID)
+    public void SetID(int id)
     {
-        this.m_Id = ID;
+        this.m_Id = id;
 
-        m_HorizontalAxis = InputMapping.LEFT_HORIZONTAL[ID - 1];
-        m_VerticalAxis = InputMapping.LEFT_VERTICAL[ID - 1];
-        m_ActionButton = InputMapping.ACTION[ID - 1];
+        SetUpInput();
+    }
+
+    private void SetUpInput()
+    {
+        m_HorizontalAxis = InputMapping.LEFT_HORIZONTAL[m_Id - 1];
+        m_VerticalAxis = InputMapping.LEFT_VERTICAL[m_Id - 1];
+        m_ActionButton = InputMapping.ACTION[m_Id - 1];
+
+        m_ActionButtonAlt = InputMapping.ACTION_ALT[m_Id - 1];
     }
 
 
@@ -101,10 +120,14 @@ public class Character : MonoBehaviour
         UIEvents.Instance().InvokeUpdateHealth(m_Id, m_Health);
     }
 
-
-    private void TryDropOrthogonalBomb()
+    private void DropOrthogonalBomb()
     {
         LevelEvents.Instance().InvokeTrySpawnOrthogonalBomb(transform.position, this);
+    }
+
+    private void DropDiagonalBomb()
+    {
+        LevelEvents.Instance().InvokeSpawnDiagonalBomb(transform.position, this);
     }
 
     public void CallbackDropOrthogonalBomb(bool result)
@@ -114,6 +137,12 @@ public class Character : MonoBehaviour
 
         m_Bombs--;
         UIEvents.Instance().InvokeUpdateBomb(m_Id, m_Bombs);
+    }
+
+    public void CallbackDropDiagonalBomb(bool result)
+    {
+        if(!result)
+            return;
     }
 
 

@@ -1,13 +1,13 @@
 ﻿using System;
 using UnityEngine;
 
-public class LevelEvents : MonoBehaviour {
-
+public class LevelEvents : MonoBehaviour
+{
     private static LevelEvents sm_Instance;
 
     // Level events
-    public event Action<Vector3, Character> TrySpawnOrthogonalBomb;
-    public event Action<Vector3> SpawnDiagonalBomb;
+    public event Action<Vector3, Character> SpawnOrthogonalBomb;
+    public event Action<Vector3, Character> SpawnDiagonalBomb;
     public event Action<Vector3> SpawnExplosionOrthogonal;
     public event Action<Vector3> SpawnExplosionDiagonal;
 
@@ -23,12 +23,12 @@ public class LevelEvents : MonoBehaviour {
 
     public void InvokeTrySpawnOrthogonalBomb(Vector3 pos, Character caller = null)
     {
-        TrySpawnOrthogonalBomb.Invoke(pos, caller);
+        SpawnOrthogonalBomb.Invoke(pos, caller);
     }
 
-    public void InvokeSpawnDiagonalBomb(Vector3 pos)
+    public void InvokeSpawnDiagonalBomb(Vector3 pos, Character caller = null)
     {
-        SpawnDiagonalBomb.Invoke(pos);
+        SpawnDiagonalBomb.Invoke(pos, caller);
     }
     public void InvokeSpawnExplosionOrthogonal(Vector3 pos)
     {
@@ -39,5 +39,4 @@ public class LevelEvents : MonoBehaviour {
     {
         SpawnExplosionDiagonal.Invoke(pos);
     }
-
 }

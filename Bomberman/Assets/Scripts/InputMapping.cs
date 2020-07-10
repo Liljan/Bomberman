@@ -10,6 +10,7 @@
 
     // Buttons
     public static string[] ACTION = { "ACTION_1", "ACTION_2", "ACTION_3", "ACTION_4" };
+    public static string[] ACTION_ALT = { "ACTION_ALT_1", "ACTION_ALT_2", "ACTION_ALT_3", "ACTION_ALT_4" };
 
     // Start and Back
     public static string[] START = { "START_1", "START_2", "START_3", "START_4" };
