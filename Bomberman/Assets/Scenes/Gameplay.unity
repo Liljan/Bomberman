@@ -4174,11 +4174,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee30639a9e92a9243ba130ecabcf4039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalInstance: {fileID: 1630139361789628, guid: 15d3134b23365644298a00267caaf708,
+  m_OriginalInstance: {fileID: 1630139361789628, guid: 15d3134b23365644298a00267caaf708,
     type: 3}
-  startSize: 0
-  isExpandable: 1
-  overrideParentGameobject: {fileID: 0}
+  m_StartSize: 40
+  m_IsExpandable: 1
+  m_OverrideParentGameObject: {fileID: 0}
 --- !u!1 &1159762102
 GameObject:
   m_ObjectHideFlags: 0
@@ -9055,11 +9055,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee30639a9e92a9243ba130ecabcf4039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalInstance: {fileID: 1792681462790594, guid: 8bc5ef3d0f683b94bb841cd14b69924b,
+  m_OriginalInstance: {fileID: 1792681462790594, guid: 8bc5ef3d0f683b94bb841cd14b69924b,
     type: 3}
-  startSize: 0
-  isExpandable: 1
-  overrideParentGameobject: {fileID: 0}
+  m_StartSize: 10
+  m_IsExpandable: 1
+  m_OverrideParentGameObject: {fileID: 0}
 --- !u!1 &1409011630
 GameObject:
   m_ObjectHideFlags: 0
@@ -9103,11 +9103,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee30639a9e92a9243ba130ecabcf4039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalInstance: {fileID: 1792681462790594, guid: 0d810451255e1d34bb09890396af05ba,
+  m_OriginalInstance: {fileID: 1792681462790594, guid: 0d810451255e1d34bb09890396af05ba,
     type: 3}
-  startSize: 0
-  isExpandable: 1
-  overrideParentGameobject: {fileID: 0}
+  m_StartSize: 10
+  m_IsExpandable: 1
+  m_OverrideParentGameObject: {fileID: 0}
 --- !u!1 &1413389145
 GameObject:
   m_ObjectHideFlags: 0
@@ -16119,15 +16119,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c58b7591a95b3428c44085d67819cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfPlayers: 1
-  explosionHandler: {fileID: 1936908253}
-  playerObject: {fileID: 1164382278641276, guid: 46a18fbc812f2274995f5a2038828e8a,
+  m_AmountOfPlayers: 1
+  m_ExplosionHandler: {fileID: 1936908253}
+  m_PlayerPefab: {fileID: 1164382278641276, guid: 46a18fbc812f2274995f5a2038828e8a,
     type: 3}
-  spawnPoints:
-  - {fileID: 66780517}
-  - {fileID: 746856517}
-  - {fileID: 777236169}
-  - {fileID: 1729038195}
+  m_SpawnPointBase: {fileID: 475090687}
 --- !u!4 &1936908252
 Transform:
   m_ObjectHideFlags: 0
@@ -16154,17 +16150,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcba8d5b8b051f3458a54b2747ed5f8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tileMap: {fileID: 478355195}
-  _gameArea: {fileID: 1159762105}
+  m_TileMap: {fileID: 478355195}
+  m_GameArea: {fileID: 1159762105}
   m_OrthogonalBomb: {fileID: 1792681462790594, guid: 8bc5ef3d0f683b94bb841cd14b69924b,
     type: 3}
   m_DiagonalBomb: {fileID: 1792681462790594, guid: 0d810451255e1d34bb09890396af05ba,
     type: 3}
   m_Explosion: {fileID: 1630139361789628, guid: 15d3134b23365644298a00267caaf708,
     type: 3}
-  _destructableTile: {fileID: 11400000, guid: 64f0e96dd2705ef4fad1cf7bcbb781c9, type: 2}
-  _wallTile: {fileID: 11400000, guid: b2b4273f7e0420b4fafe511c16cc33e1, type: 2}
-  _ObjectLayers:
+  m_DestructableTile: {fileID: 11400000, guid: 64f0e96dd2705ef4fad1cf7bcbb781c9, type: 2}
+  m_WallTile: {fileID: 11400000, guid: 7eb77ffbda36f704c9a57434f2dcfe24, type: 2}
+  m_ObjectLayers:
     serializedVersion: 2
     m_Bits: 1024
 --- !u!114 &1936908254
@@ -16179,7 +16175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: decddfc622fc8d143a2a3e6634ae4410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 1317160994}
+  m_Camera: {fileID: 1317160994}
 --- !u!114 &1936908255
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class ObjectPool : MonoBehaviour
 {
     public GameObject m_OriginalInstance;
-    public int m_StartSize;
-    public bool m_IsExpandable;
+    public int m_StartSize = 10;
+    public bool m_IsExpandable = true;
 
     public Transform m_OverrideParentGameObject = null;
 

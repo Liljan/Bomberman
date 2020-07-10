@@ -9,18 +9,41 @@ public class LevelHandler : MonoBehaviour
     public ExplosionHandler m_ExplosionHandler;
 
     public GameObject m_PlayerPefab;
-    public Transform[] m_SpawnPoints;
     private List<Character> m_Players;
 
-    // Use this for initialization
-    void Start()
+    public Transform m_SpawnPointBase = null;
+    private List<Transform> m_SpawnPoints = new List<Transform>();
+
+    private void Awake()
     {
-        for(int i = 0; i < m_AmountOfPlayers; i++)
+        SetupSpawnPoints();
+        SpawnPlayers();
+    }
+
+    private void SetupSpawnPoints()
+    {
+        Debug.Assert(m_SpawnPointBase);
+
+        foreach (Transform transform in m_SpawnPointBase)
+            m_SpawnPoints.Add(transform); 
+    }
+
+    private void SpawnPlayers()
+    {
+        Debug.Assert(m_PlayerPefab);
+
+        for (int i = 0; i < m_AmountOfPlayers; i++)
         {
             GameObject spawnedPlayer = Instantiate(m_PlayerPefab, m_SpawnPoints[i].position, Quaternion.identity);
             Character character = spawnedPlayer.GetComponent<Character>();
             character.SetID(i + 1);
         }
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+
     }
 
 
