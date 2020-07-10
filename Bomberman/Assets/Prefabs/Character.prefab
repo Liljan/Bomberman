@@ -163,8 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13a42665d553cf45bc96c83874cf1fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 1
-  speed: 4
-  bombsMax: 3
-  bombRechargeTime: 3
-  healthMax: 3
+  m_Id: 0
+  m_Speed: 5
+  m_BombsMax: 3
+  m_BombRechargeTime: 3
+  m_HealthMax: 3

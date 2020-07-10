@@ -86,11 +86,11 @@ InputManager:
     axis: 15
     joyNum: 1
   - serializedVersion: 3
-    m_Name: ACTION_1
+    m_Name: ACTION_2
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: left ctrl
+    positiveButton: right ctrl
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -100,7 +100,7 @@ InputManager:
     invert: 0
     type: 0
     axis: 15
-    joyNum: 1
+    joyNum: 2
   - serializedVersion: 3
     m_Name: ACTION_ALT_1
     descriptiveName: 
@@ -117,3 +117,19 @@ InputManager:
     type: 0
     axis: 15
     joyNum: 1
+  - serializedVersion: 3
+    m_Name: ACTION_ALT_2
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: right shift
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 15
+    joyNum: 2
