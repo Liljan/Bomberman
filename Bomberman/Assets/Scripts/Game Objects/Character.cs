@@ -17,6 +17,8 @@ public class Character : MonoBehaviour
 
     public int m_HealthMax = 3;
     private int m_Health;
+    public float m_ImmunityTimeMax = 0.5f;
+    private float m_ImmunityTime;
 
     private Rigidbody2D m_Rb2d;
     private Animator m_Animator;
@@ -31,6 +33,8 @@ public class Character : MonoBehaviour
     {
         m_Bombs = m_BombsMax;
         m_Health = m_HealthMax;
+        m_ImmunityTime = m_ImmunityTimeMax;
+
         m_BombRechargeTimer = m_BombRechargeTime;
     }
 
