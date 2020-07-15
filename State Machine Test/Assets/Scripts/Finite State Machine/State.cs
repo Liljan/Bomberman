@@ -13,6 +13,10 @@ public abstract class State : MonoBehaviour
         m_StateManager = this.gameObject.GetComponent<StateManager>();
     }
 
+    protected virtual void AdvanceToNextState()
+    {
+        m_StateManager.GotoState(m_NextState);
+    }
 
     public abstract void Enter();
     public abstract void Exit();

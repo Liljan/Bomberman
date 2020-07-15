@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class SetupState : State
+public class GameplayState : State
 {
     protected override void Awake()
     {
@@ -10,15 +10,16 @@ public class SetupState : State
 
     public override void Enter()
     {
-        Debug.Log("Entering Setup state.");
-
-        StartCoroutine(SimulateSetup(0.2f));
+        StartCoroutine(SimulatePreGame());
     }
 
-    private IEnumerator SimulateSetup(float time)
+    private IEnumerator SimulatePreGame()
     {
-        yield return new WaitForSeconds(time);
+        Debug.Log("Playing the game.");
 
+        yield return new WaitForSeconds(1.0f);
+
+        Debug.Log("Game över.");
         AdvanceToNextState();
     }
 

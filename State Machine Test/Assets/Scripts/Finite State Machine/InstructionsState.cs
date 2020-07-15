@@ -14,25 +14,18 @@ public class InstructionsState : State
 
     public override void Enter()
     {
-        Debug.Log("Entering Instructions state.");
         StartCoroutine(ShowInstructions(m_Time));
     }
 
     public override void Exit()
     {
-        Debug.Log("Exiting Instructions state.");
     }
 
     private IEnumerator ShowInstructions(float time)
     {
         yield return new WaitForSeconds(time);
 
-        GotoNextState();
-    }
-
-    private void GotoNextState()
-    {
-        m_StateManager.GotoState(m_NextState);
+        AdvanceToNextState();
     }
 
 }
