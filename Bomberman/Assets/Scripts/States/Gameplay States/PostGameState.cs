@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PostGameState : State
 {
@@ -22,7 +23,8 @@ public class PostGameState : State
             yield return new WaitForSeconds(1.0f);
         }
 
-        yield return new WaitForSeconds(5.0f);
+        SceneManager.LoadScene("Gameplay");
+
         AdvanceToNextState();
     }
 

@@ -12,8 +12,6 @@ public abstract class State : MonoBehaviour
     protected virtual void Awake()
     {
         Debug.Assert(m_StateManager);
-
-        DontDestroyOnLoad(this.gameObject);
     }
 
     protected virtual void AdvanceToNextState()

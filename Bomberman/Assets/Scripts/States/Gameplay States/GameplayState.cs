@@ -17,7 +17,7 @@ public class GameplayState : State
     {
         Debug.Log("Playing the game.");
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(100000.0f);
 
         Debug.Log("Game över.");
         AdvanceToNextState();

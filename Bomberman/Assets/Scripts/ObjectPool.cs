@@ -15,8 +15,6 @@ public class ObjectPool : MonoBehaviour
     private void Awake()
     {
         Debug.Assert(m_OriginalInstance);
-
-        DontDestroyOnLoad(this.gameObject);
         
         m_Pool = new List<GameObject>(m_StartSize);
 
