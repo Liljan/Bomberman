@@ -3,6 +3,7 @@ using UnityEngine;
 
 public abstract class State : MonoBehaviour
 {
+    [SerializeField]
     protected StateManager m_StateManager;
 
     [SerializeField]
@@ -10,7 +11,9 @@ public abstract class State : MonoBehaviour
 
     protected virtual void Awake()
     {
-        m_StateManager = this.gameObject.GetComponent<StateManager>();
+        Debug.Assert(m_StateManager);
+
+        DontDestroyOnLoad(this.gameObject);
     }
 
     protected virtual void AdvanceToNextState()

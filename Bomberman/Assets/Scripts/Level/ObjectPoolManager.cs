@@ -49,6 +49,7 @@ public class ObjectPoolManager : MonoBehaviour
     private void Awake()
     {
         sm_Instance = this;
+        DontDestroyOnLoad(this.gameObject);
 
         Init();
     }

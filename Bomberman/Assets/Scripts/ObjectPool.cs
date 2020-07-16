@@ -16,6 +16,8 @@ public class ObjectPool : MonoBehaviour
     {
         Debug.Assert(m_OriginalInstance);
 
+        DontDestroyOnLoad(this.gameObject);
+        
         m_Pool = new List<GameObject>(m_StartSize);
 
         Transform spawnedObjectParent = m_OverrideParentGameObject != null ? m_OverrideParentGameObject : this.transform;
