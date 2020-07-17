@@ -20,11 +20,11 @@ public class UIEvents : MonoBehaviour
 
     public void InvokeUpdateHealth(int ID, int health)
     {
-        UpdateHealth.Invoke(ID, health);
+        UpdateHealth?.Invoke(ID, health);
     }
 
     public void InvokeUpdateBomb(int ID, int bombs)
     {
-        UpdateBombs.Invoke(ID, bombs);
+        UpdateBombs?.Invoke(ID, bombs);
     }
 }
