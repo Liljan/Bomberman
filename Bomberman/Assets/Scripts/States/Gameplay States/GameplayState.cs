@@ -10,6 +10,8 @@ public class GameplayState : State
 
     public override void Enter()
     {
+        m_StateManager.SetGameInputActive(true);
+
         StartCoroutine(SimulatePreGame());
     }
 
@@ -25,5 +27,6 @@ public class GameplayState : State
 
     public override void Exit()
     {
+        m_StateManager.SetGameInputActive(false);
     }
 }

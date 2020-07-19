@@ -5,9 +5,25 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour
 {
+    private static StateManager sm_Instance;
+
     private State m_CurrentState = null;
 
     [SerializeField] private State m_StartState;
+
+    private bool m_IsInputActive = false;
+
+    public static StateManager Instance()
+    {
+        return sm_Instance;
+    }
+
+    private void Awake()
+    {
+        sm_Instance = this;
+
+        SetGameInputActive(false);
+    }
 
     void Start()
     {
@@ -48,5 +64,15 @@ public class StateManager : MonoBehaviour
         EnterCurrentState();
 
         return true;
+    }
+
+    public bool IsInputActive()
+    {
+        return m_IsInputActive;
+    }
+
+    public void SetGameInputActive(bool active)
+    {
+        m_IsInputActive = active;
     }
 }

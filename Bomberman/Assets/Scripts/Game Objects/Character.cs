@@ -88,7 +88,9 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //MoveStickSensitivity();
+        if(!StateManager.Instance().IsInputActive())
+            return;
+
         MoveWithSticks();
 
         if (Input.GetButtonDown(m_ActionButton) && m_Bombs > 0)
