@@ -12,25 +12,22 @@ public class InstructionsState : State
     protected override void Awake()
     {
         base.Awake();
-    }
 
+        Debug.Assert(m_InstructionsUI);
+    }
 
     public override void Enter()
     {
         m_InstructionsUI.SetActive(true);
-        StartCoroutine(ShowInstructions(m_Time));
     }
 
     public override void Exit()
     {
-        m_InstructionsUI.SetActive(true);
+        m_InstructionsUI.SetActive(false);
     }
 
-    private IEnumerator ShowInstructions(float time)
+    public void CompleteState()
     {
-        yield return new WaitForSeconds(time);
-
         AdvanceToNextState();
     }
-
 }
