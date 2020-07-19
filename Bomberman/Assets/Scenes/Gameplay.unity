@@ -9663,7 +9663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_StateManager: {fileID: 1936908256}
-  m_NextState: {fileID: 0}
+  m_NextState: {fileID: 1604215389}
 --- !u!1 &1443409042
 GameObject:
   m_ObjectHideFlags: 0

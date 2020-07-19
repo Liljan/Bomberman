@@ -46,15 +46,25 @@ public class Character : MonoBehaviour
 
     private void MoveWithSticks()
     {
-        float x = Input.GetAxis(m_HorizontalAxis);
-        float y = Input.GetAxis(m_VerticalAxis);
+        bool canMove = StateManager.Instance().IsInputActive();
 
-        m_Rb2d.velocity = m_Speed * NormalizeVelocity(x, y);
+        Vector2 input = Vector2.zero;
 
-        m_Animator.SetBool("Left", x > 0.0f);
-        m_Animator.SetBool("Right", x < -0.0f);
-        m_Animator.SetBool("Up", y > 0.0f);
-        m_Animator.SetBool("Down", y < -0.0f);
+        if(canMove)
+        {
+            input.x = Input.GetAxis(m_HorizontalAxis);
+            input.y = Input.GetAxis(m_VerticalAxis);
+        }
+
+        m_Rb2d.velocity = input * m_Speed;
+    }
+
+    private void SetAnimation(Vector2 input)
+    {
+        m_Animator.SetBool("Left", input.x > 0.0f);
+        m_Animator.SetBool("Right", input.x < -0.0f);
+        m_Animator.SetBool("Up", input.y > 0.0f);
+        m_Animator.SetBool("Down", input.y < -0.0f);
     }
 
     private Vector3 NormalizeVelocity(float vx, float vy)
@@ -88,10 +98,13 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!StateManager.Instance().IsInputActive())
-            return;
+        // Todo: Create intermediary touch input interface
 
         MoveWithSticks();
+        SetAnimation(m_Rb2d.velocity);
+
+        if(!StateManager.Instance().IsInputActive())
+            return;
 
         if (Input.GetButtonDown(m_ActionButton) && m_Bombs > 0)
             DropOrthogonalBomb();
@@ -100,7 +113,6 @@ public class Character : MonoBehaviour
 
         RechargeBombs();
     }
-
 
     public void SetID(int id)
     {
@@ -117,7 +129,6 @@ public class Character : MonoBehaviour
 
         m_ActionButtonAlt = InputMapping.ACTION_ALT[m_Id - 1];
     }
-
 
     private void TakeDamage(int damage)
     {
@@ -157,6 +168,4 @@ public class Character : MonoBehaviour
         if(collision.gameObject.tag == "Explosion")
             TakeDamage(1);
     }
-
-
 }

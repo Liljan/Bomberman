@@ -23,8 +23,6 @@ public class PostGameState : State
             yield return new WaitForSeconds(1.0f);
         }
 
-        SceneManager.LoadScene("Gameplay");
-
         AdvanceToNextState();
     }
 
