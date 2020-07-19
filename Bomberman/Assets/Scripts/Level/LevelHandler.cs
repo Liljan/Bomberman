@@ -9,14 +9,29 @@ public class LevelHandler : MonoBehaviour
     public ExplosionHandler m_ExplosionHandler;
 
     public GameObject m_PlayerPefab;
-    private List<Character> m_Players;
+    private List<Character> m_Players = new List<Character>();
 
     public Transform m_SpawnPointBase = null;
     private List<Transform> m_SpawnPoints = new List<Transform>();
 
+    private void OnEnable()
+    {
+        LevelEvents.Instance().Reset += Reset;
+    }
+
+    private void OnDisable()
+    {
+        LevelEvents.Instance().Reset -= Reset;
+    }
+
     private void Awake()
     {
         SetupSpawnPoints();
+        CreatePlayers();
+    }
+
+    private void Reset()
+    {
         SpawnPlayers();
     }
 
@@ -24,28 +39,33 @@ public class LevelHandler : MonoBehaviour
     {
         Debug.Assert(m_SpawnPointBase);
 
-        foreach (Transform transform in m_SpawnPointBase)
+        foreach(Transform transform in m_SpawnPointBase)
             m_SpawnPoints.Add(transform); 
     }
 
-    private void SpawnPlayers()
+    private void CreatePlayers()
     {
         Debug.Assert(m_PlayerPefab);
 
-        for (int i = 0; i < m_AmountOfPlayers; i++)
+        for(int i = 0; i < m_AmountOfPlayers; i++)
         {
             GameObject spawnedPlayer = Instantiate(m_PlayerPefab, m_SpawnPoints[i].position, Quaternion.identity);
             Character character = spawnedPlayer.GetComponent<Character>();
             character.SetID(i + 1);
+
+            m_Players.Add(character);
         }
     }
 
-    // Use this for initialization
-    void Start()
+    private void SpawnPlayers()
     {
+        for(int i = 0; i < m_Players.Count; i++)
+        {
+            Character character = m_Players[i];
+            character.transform.position = m_SpawnPoints[i].position;
+            character.transform.rotation = Quaternion.identity;
 
+            // Todo: Reset the character's health
+        }
     }
-
-
-    
 }

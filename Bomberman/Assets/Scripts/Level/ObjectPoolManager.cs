@@ -75,6 +75,12 @@ public class ObjectPoolManager : MonoBehaviour
         return m_PoolMap[prefabID].SpawnObject(position, rotation);
     }
 
+    public void DespawnAll()
+    {
+        foreach(KeyValuePair<int, ObjectPool> pool in m_PoolMap)
+            pool.Value.DespawnAll();
+    }
+
     public bool DespawnPool(int prefabID)
     {
         if(!m_PoolMap.ContainsKey(prefabID))

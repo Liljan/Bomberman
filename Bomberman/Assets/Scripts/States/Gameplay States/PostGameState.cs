@@ -28,5 +28,6 @@ public class PostGameState : State
 
     public override void Exit()
     {
+        LevelEvents.Instance().InvokeReset();
     }
 }

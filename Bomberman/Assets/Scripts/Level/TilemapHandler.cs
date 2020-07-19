@@ -16,6 +16,17 @@ public class TilemapHandler : MonoBehaviour
 
     public LayerMask m_ObjectLayers;
 
+
+    private void OnEnable()
+    {
+        LevelEvents.Instance().Reset += ResetTilemap;
+    }
+
+    private void OnDisable()
+    {
+        LevelEvents.Instance().Reset -= ResetTilemap;
+    }
+
     private void Awake()
     {
         CopyTilemap();

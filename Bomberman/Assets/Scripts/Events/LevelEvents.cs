@@ -6,6 +6,9 @@ public class LevelEvents : MonoBehaviour
     private static LevelEvents sm_Instance;
 
     // Level events
+
+    public event Action Reset;
+    
     public event Action<Vector3, Character> SpawnOrthogonalBomb;
     public event Action<Vector3, Character> SpawnDiagonalBomb;
     public event Action<Vector3> SpawnExplosionOrthogonal;
@@ -19,6 +22,11 @@ public class LevelEvents : MonoBehaviour
     public static LevelEvents Instance()
     {
         return sm_Instance;
+    }
+
+    public void InvokeReset()
+    {
+        Reset.Invoke();
     }
 
     public void InvokeTrySpawnOrthogonalBomb(Vector3 pos, Character caller = null)

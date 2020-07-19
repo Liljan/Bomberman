@@ -18,6 +18,8 @@ public class ExplosionHandler : MonoBehaviour
 
     private void OnEnable()
     {
+        LevelEvents.Instance().Reset += Reset;
+
         LevelEvents.Instance().SpawnExplosionOrthogonal += SpawnExplosionOrthogonal;
         LevelEvents.Instance().SpawnExplosionDiagonal += SpawnExplosionDiagonal;
 
@@ -27,6 +29,8 @@ public class ExplosionHandler : MonoBehaviour
 
     private void OnDisable()
     {
+        LevelEvents.Instance().Reset -= Reset;
+
         LevelEvents.Instance().SpawnExplosionOrthogonal -= SpawnExplosionOrthogonal;
         LevelEvents.Instance().SpawnExplosionDiagonal -= SpawnExplosionDiagonal;
 
@@ -34,8 +38,10 @@ public class ExplosionHandler : MonoBehaviour
         LevelEvents.Instance().SpawnDiagonalBomb -= TrySpawnDiagonalBomb;
     }
 
-
-
+    private void Reset()
+    {
+        ObjectPoolManager.Instance().DespawnAll();
+    }
 
     public void TrySpawnOrthogonalBomb(Vector3 pos, Character player = null)
     {
